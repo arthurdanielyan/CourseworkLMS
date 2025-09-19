@@ -3,6 +3,8 @@ package com.coursework.featurelogin.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
+import com.coursework.featureSearchBooks.SearchBooksDestination
+import com.coursework.featurelogin.LoginDestination
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,6 +49,11 @@ class LoginViewModel(
 
     override fun onLoginAsStudentClick() {
         // TODO: Not yet implemented
+        appRouter.navigate(
+            destination = SearchBooksDestination,
+            popUpTo = LoginDestination::class,
+            inclusive = true,
+        )
     }
 
     override fun onLoginAsTeacherClick() {

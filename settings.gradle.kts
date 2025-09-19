@@ -20,9 +20,14 @@ dependencyResolutionManagement {
 }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+
 rootProject.name = "LMS"
 includeBuild("gradlePlugins")
 include(":app")
 include(":featureLogin")
 include(":corePresentation")
 include(":utils")
+
+include("data")
+include("domain")
+include("featureSearchBooks")

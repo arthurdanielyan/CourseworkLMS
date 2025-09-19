@@ -1,5 +1,7 @@
 package com.coursework.lms
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -10,6 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.coursework.corePresentation.extensions.ComposeCollect
 import com.coursework.corePresentation.navigation.NavEvent
 import com.coursework.corePresentation.navigation.NavEventHolder
+import com.coursework.featureSearchBooks.SearchBooksDestination
+import com.coursework.featureSearchBooks.ui.SearchBooksScreen
 import com.coursework.featurelogin.LoginDestination
 import com.coursework.featurelogin.ui.LoginScreen
 import org.koin.compose.koinInject
@@ -19,10 +23,26 @@ internal fun RootNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = LoginDestination
+        startDestination = LoginDestination,
+        enterTransition = {
+            slideInHorizontally { it }
+        },
+        exitTransition = {
+            slideOutHorizontally { -it }
+        },
+        popEnterTransition = {
+            slideInHorizontally { -it }
+        },
+        popExitTransition = {
+            slideOutHorizontally { it }
+        }
     ) {
         composable<LoginDestination> {
             LoginScreen()
+        }
+
+        composable<SearchBooksDestination> {
+            SearchBooksScreen()
         }
     }
     ObserveNavEvents(navController)
@@ -39,7 +59,15 @@ private fun ObserveNavEvents(
     ) { navEvent ->
         when (navEvent) {
             is NavEvent.Navigate<*> -> {
-                navController.navigate(navEvent.destination)
+                navController.navigate(navEvent.destination) {
+                    val popUpToDestination = navEvent.popUpTo
+                    if (popUpToDestination != null) {
+                        popUpTo(popUpToDestination) {
+                            inclusive = navEvent.inclusive
+                        }
+                    }
+                    launchSingleTop = true
+                }
             }
 
             NavEvent.Pop -> {

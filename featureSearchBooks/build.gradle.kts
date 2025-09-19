@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.coursework.featurelogin"
+    namespace = "com.coursework.featureSearchBooks"
 }
 
 dependencies {
@@ -15,5 +15,5 @@ dependencies {
 
     implementation(projects.corePresentation)
     implementation(projects.utils)
-    implementation(projects.featureSearchBooks)
+    implementation(projects.domain)
 }

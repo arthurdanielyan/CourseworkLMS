@@ -66,6 +66,7 @@ private fun LoginScreen(
             label = stringResource(Strings.email),
             placeholder = stringResource(Strings.enter_email),
             keyboardType = KeyboardType.Email,
+            errorMessageEnabled = true,
         )
         SpacerHeight(8.dp)
         TextField(

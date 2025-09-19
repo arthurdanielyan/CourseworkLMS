@@ -2,6 +2,9 @@ package com.coursework.lms
 
 import android.app.Application
 import com.coursework.corePresentation.navigation.di.navigationModule
+import com.coursework.data.di.dataModule
+import com.coursework.domain.di.domainModule
+import com.coursework.featureSearchBooks.di.featureSearchBooksModule
 import com.coursework.featurelogin.di.featureLoginModule
 import com.coursework.utils.stringProvider.stringProviderModule
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +19,10 @@ class IMSApplication : Application() {
             modules(
                 stringProviderModule,
                 navigationModule,
-                featureLoginModule
+                dataModule,
+                domainModule,
+                featureLoginModule,
+                featureSearchBooksModule,
             )
         }
     }

@@ -65,4 +65,7 @@ dependencies {
     implementation(projects.utils)
     implementation(projects.corePresentation)
     implementation(projects.featureLogin)
+    implementation(projects.data)
+    implementation(projects.domain)
+    implementation(projects.featureSearchBooks)
 }

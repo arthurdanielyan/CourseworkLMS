@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_books">Search books</string>
+    <string name="by_authors">by %1$s</string>
+    <string name="pdf_available">PDF available</string>
+    <string name="no_books_found">No books found</string>
+    <string name="publisher">Publisher: %1$s</string>
+</resources>

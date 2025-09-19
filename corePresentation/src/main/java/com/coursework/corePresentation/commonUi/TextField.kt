@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -28,6 +32,8 @@ fun TextField(
     errorMessage: String? = null,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardType: KeyboardType = KeyboardType.Unspecified,
+    errorMessageEnabled: Boolean = false,
+    showCleanIcon: Boolean = false,
 ) {
     Column(
         modifier = modifier,
@@ -65,12 +71,28 @@ fun TextField(
                 PasswordVisualTransformation()
             } else {
                 VisualTransformation.None
-            }
+            },
+            trailingIcon = if (showCleanIcon) {
+                {
+                    IconButton(
+                        onClick = {
+                            onValueChange("")
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Clear input"
+                        )
+                    }
+                }
+            } else null
         )
-        Text(
-            text = errorMessage.takeIf { isError }.orEmpty(),
-            color = MaterialTheme.colorScheme.error,
-            style = MaterialTheme.typography.bodySmall,
-        )
+        if (errorMessageEnabled) {
+            Text(
+                text = errorMessage.takeIf { isError }.orEmpty(),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
     }
 }

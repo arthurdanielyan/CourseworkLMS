@@ -1,4 +1,4 @@
-package com.coursework.gradleplugins
+package com.coursework.gradlePlugins
 
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Project
@@ -6,8 +6,6 @@ import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
-import kotlin.apply
-import kotlin.jvm.java
 
 internal val Project.versionCatalog: VersionCatalog
     get() =

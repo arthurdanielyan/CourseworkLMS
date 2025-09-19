@@ -3,7 +3,6 @@
 .idea/*
 !.idea/inspectionProfiles
 !.idea/runConfigurations
-!.idea/vcs.xml
 .DS_Store
 /build
 /captures

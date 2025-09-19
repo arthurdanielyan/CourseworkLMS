@@ -1,4 +1,4 @@
-package com.coursework.gradleplugins
+package com.coursework.gradlePlugins
 
 object LibraryProjectConfig {
     const val compileSdk = 36

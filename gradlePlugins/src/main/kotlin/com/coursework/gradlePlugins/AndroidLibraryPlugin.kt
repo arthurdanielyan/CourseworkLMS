@@ -1,4 +1,4 @@
-package com.coursework.gradleplugins
+package com.coursework.gradlePlugins
 
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
@@ -17,7 +17,7 @@ class AndroidLibraryPlugin : Plugin<Project> {
 
         project.pluginManager.apply {
             apply(libs.getPlugin("android-library"))
-            apply(libs.getPlugin("jetbrains-kotlin-android"))
+            apply(libs.getPlugin("kotlin-android"))
         }
     }
 
@@ -35,11 +35,9 @@ class AndroidLibraryPlugin : Plugin<Project> {
             buildTypes {
                 release {
                     isMinifyEnabled = true
-                    isShrinkResources = true
                 }
                 debug {
                     isMinifyEnabled = false
-                    isShrinkResources = false
                 }
             }
             compileOptions {

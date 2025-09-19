@@ -1,0 +1,23 @@
+package com.coursework.lms
+
+import android.app.Application
+import com.coursework.corePresentation.navigation.di.navigationModule
+import com.coursework.featurelogin.di.featureLoginModule
+import com.coursework.utils.stringProvider.stringProviderModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+
+class IMSApplication : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(applicationContext)
+            modules(
+                stringProviderModule,
+                navigationModule,
+                featureLoginModule
+            )
+        }
+    }
+}

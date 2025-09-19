@@ -18,7 +18,11 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "My Application"
+rootProject.name = "LMS"
 includeBuild("gradlePlugins")
 include(":app")
+include(":featureLogin")
+include(":corePresentation")
+include(":utils")

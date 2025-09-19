@@ -1,4 +1,4 @@
-package com.coursework.gradleplugins
+package com.coursework.gradlePlugins
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -21,7 +21,7 @@ class UsesComposePlugin : Plugin<Project> {
         val libs = versionCatalog
 
         pluginManager.apply {
-            apply(libs.getPlugin("compose-compiler"))
+            apply(libs.getPlugin("kotlin-compose"))
         }
     }
 }

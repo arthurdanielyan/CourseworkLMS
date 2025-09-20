@@ -5,7 +5,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlin.reflect.KClass
 
-class AppRouterImpl : AppRouter, NavEventHolder {
+internal class AppRouterImpl : AppRouter, NavEventHolder {
 
     private val _navEvents = Channel<NavEvent>()
     override val navEvents = _navEvents.receiveAsFlow()

@@ -6,6 +6,7 @@ import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.toComposeList
 import com.coursework.domain.usecases.SearchBooksUseCase
+import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureSearchBooks.presentation.mapper.BookViewStateMapper
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
@@ -89,7 +90,11 @@ class SearchBooksViewModel(
     }
 
     override fun onBookClick(book: BookViewState) {
-        // TODO: Not yet implemented
+        appRouter.navigate(
+            BookDetailsDestination(
+                id = book.id
+            )
+        )
     }
 
     override fun onRefresh() {

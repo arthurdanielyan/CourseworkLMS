@@ -9,9 +9,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.coursework.corePresentation.extensions.ComposeCollect
 import com.coursework.corePresentation.navigation.NavEvent
 import com.coursework.corePresentation.navigation.NavEventHolder
+import com.coursework.featureBookDetails.BookDetailsDestination
+import com.coursework.featureBookDetails.ui.BookDetailsScreen
 import com.coursework.featureHome.ui.HomeScreen
 import com.coursework.featureHome.ui.HomeScreenDestination
 import com.coursework.featurelogin.LoginDestination
@@ -43,6 +46,10 @@ internal fun RootNavigation() {
 
         composable<HomeScreenDestination> {
             HomeScreen()
+        }
+
+        composable<BookDetailsDestination> {
+            BookDetailsScreen(it.toRoute())
         }
     }
     ObserveNavEvents(navController)

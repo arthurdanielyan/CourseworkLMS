@@ -69,4 +69,5 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.featureHome)
     implementation(projects.featureSearchBooks)
+    implementation(projects.featureBookDetails)
 }

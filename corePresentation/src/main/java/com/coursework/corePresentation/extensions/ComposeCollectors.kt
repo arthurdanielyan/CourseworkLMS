@@ -2,9 +2,16 @@ package com.coursework.corePresentation.extensions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.autoSaver
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -38,5 +45,26 @@ fun <T> ComposeCollect(
                     flow.collect(onEvent)
             }
         }
+    }
+}
+/**
+ * Calls [block] when [key] changes. In contrast to [LaunchedEffect] this
+ * doesn't re-execute [block] when configuration change happens. Note that [T]
+ * has to be saveable.
+ * */
+@Composable
+fun <T> ObserveState(
+    key: T,
+    saver: Saver<T, out Any> = autoSaver(),
+    block: suspend CoroutineScope.(T) -> Unit,
+) {
+    var lastValue by rememberSaveable(stateSaver = saver) {
+        mutableStateOf(key)
+    }
+    LaunchedEffect(key) {
+        if(lastValue != key) {
+            block(key)
+        }
+        lastValue = key
     }
 }

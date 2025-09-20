@@ -1,4 +1,4 @@
-package com.coursework.domain
+package com.coursework.domain.usecases
 
 import com.coursework.domain.model.Book
 import com.coursework.domain.repository.BooksRepository

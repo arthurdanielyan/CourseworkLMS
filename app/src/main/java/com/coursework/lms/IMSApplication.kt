@@ -4,6 +4,7 @@ import android.app.Application
 import com.coursework.corePresentation.navigation.di.navigationModule
 import com.coursework.data.di.dataModule
 import com.coursework.domain.di.domainModule
+import com.coursework.featureHome.di.homeModule
 import com.coursework.featureSearchBooks.di.featureSearchBooksModule
 import com.coursework.featurelogin.di.featureLoginModule
 import com.coursework.utils.stringProvider.stringProviderModule
@@ -21,6 +22,7 @@ class IMSApplication : Application() {
                 navigationModule,
                 dataModule,
                 domainModule,
+                homeModule,
                 featureLoginModule,
                 featureSearchBooksModule,
             )

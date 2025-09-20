@@ -13,13 +13,15 @@ class AppRouterImpl : AppRouter, NavEventHolder {
     override fun <T : Destination> navigate(
         destination: T,
         popUpTo: KClass<*>?,
-        inclusive: Boolean
+        inclusive: Boolean,
+        saveState: Boolean,
     ) {
         _navEvents.trySend(
             NavEvent.Navigate(
                 destination = destination,
                 popUpTo = popUpTo,
                 inclusive = inclusive,
+                saveState = saveState,
             )
         )
     }

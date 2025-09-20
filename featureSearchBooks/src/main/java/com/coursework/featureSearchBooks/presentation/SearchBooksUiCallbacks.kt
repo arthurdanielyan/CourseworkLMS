@@ -1,6 +1,7 @@
 package com.coursework.featureSearchBooks.presentation
 
 import androidx.compose.runtime.Immutable
+import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 
 @Immutable
 interface SearchBooksUiCallbacks {

@@ -80,16 +80,27 @@ private fun LoginScreen(
         )
 
         SpacerHeight(16.dp)
-
         PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
-            text = "Login as student",
+            text = stringResource(Strings.login),
+            onClick = callbacks::onLoginAsStudentClick
+        )
+
+        SpacerHeight(32.dp)
+        Text(
+            text = "For testing purposes only",
+            color = MaterialTheme.colorScheme.onBackground,
+            style = MaterialTheme.typography.bodyLarge,
+        )
+        PrimaryButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Simulate login as a student",
             onClick = callbacks::onLoginAsStudentClick
         )
         SpacerHeight(8.dp)
         PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
-            text = "Login as teacher",
+            text = "Simulate login as a teacher",
             onClick = callbacks::onLoginAsTeacherClick
         )
 

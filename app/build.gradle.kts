@@ -67,5 +67,6 @@ dependencies {
     implementation(projects.featureLogin)
     implementation(projects.data)
     implementation(projects.domain)
+    implementation(projects.featureHome)
     implementation(projects.featureSearchBooks)
 }

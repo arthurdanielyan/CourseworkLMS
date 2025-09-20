@@ -5,8 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.toComposeList
-import com.coursework.domain.SearchBooksUseCase
+import com.coursework.domain.usecases.SearchBooksUseCase
 import com.coursework.featureSearchBooks.presentation.mapper.BookViewStateMapper
+import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
+import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
 import com.coursework.utils.mapList
 import com.coursework.utils.stateInWhileSubscribed
 import kotlinx.coroutines.channels.BufferOverflow

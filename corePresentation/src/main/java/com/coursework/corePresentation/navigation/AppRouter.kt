@@ -9,6 +9,7 @@ interface AppRouter {
         destination: T,
         popUpTo: KClass<*>? = null,
         inclusive: Boolean = false,
+        saveState: Boolean = false
     )
 
     fun pop()

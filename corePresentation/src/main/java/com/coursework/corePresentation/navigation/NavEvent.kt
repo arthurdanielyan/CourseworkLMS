@@ -8,7 +8,8 @@ sealed interface NavEvent {
     data class Navigate<T : Destination>(
         val destination: T,
         val popUpTo: KClass<*>?,
-        val inclusive: Boolean
+        val inclusive: Boolean,
+        val saveState: Boolean,
     ) : NavEvent
 
     object Pop : NavEvent

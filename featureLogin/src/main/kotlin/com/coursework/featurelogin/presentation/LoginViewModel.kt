@@ -3,7 +3,7 @@ package com.coursework.featurelogin.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
-import com.coursework.featureSearchBooks.SearchBooksDestination
+import com.coursework.featureHome.ui.HomeScreenDestination
 import com.coursework.featurelogin.LoginDestination
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider
@@ -47,10 +47,14 @@ class LoginViewModel(
         passwordInput.update { value }
     }
 
-    override fun onLoginAsStudentClick() {
+    override fun onLoginClick() {
         // TODO: Not yet implemented
+    }
+
+    override fun onLoginAsStudentClick() {
+        // For Testing
         appRouter.navigate(
-            destination = SearchBooksDestination,
+            destination = HomeScreenDestination,
             popUpTo = LoginDestination::class,
             inclusive = true,
         )

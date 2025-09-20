@@ -12,8 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.coursework.corePresentation.extensions.ComposeCollect
 import com.coursework.corePresentation.navigation.NavEvent
 import com.coursework.corePresentation.navigation.NavEventHolder
-import com.coursework.featureSearchBooks.SearchBooksDestination
-import com.coursework.featureSearchBooks.ui.SearchBooksScreen
+import com.coursework.featureHome.ui.HomeScreen
+import com.coursework.featureHome.ui.HomeScreenDestination
 import com.coursework.featurelogin.LoginDestination
 import com.coursework.featurelogin.ui.LoginScreen
 import org.koin.compose.koinInject
@@ -41,8 +41,8 @@ internal fun RootNavigation() {
             LoginScreen()
         }
 
-        composable<SearchBooksDestination> {
-            SearchBooksScreen()
+        composable<HomeScreenDestination> {
+            HomeScreen()
         }
     }
     ObserveNavEvents(navController)
@@ -64,7 +64,9 @@ private fun ObserveNavEvents(
                     if (popUpToDestination != null) {
                         popUpTo(popUpToDestination) {
                             inclusive = navEvent.inclusive
+                            saveState = navEvent.saveState
                         }
+                        restoreState = true
                     }
                     launchSingleTop = true
                 }

@@ -5,15 +5,18 @@ plugins {
 }
 
 android {
-    namespace = "com.coursework.featurelogin"
+    namespace = "com.coursework.featureHome"
 }
 
 dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(projects.corePresentation)
     implementation(projects.utils)
-    implementation(projects.featureHome)
+    implementation(projects.domain)
+    implementation(projects.featureSearchBooks)
 }

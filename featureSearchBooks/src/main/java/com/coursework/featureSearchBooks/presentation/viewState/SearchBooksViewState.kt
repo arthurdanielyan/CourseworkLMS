@@ -1,4 +1,4 @@
-package com.coursework.featureSearchBooks.presentation
+package com.coursework.featureSearchBooks.presentation.viewState
 
 import androidx.compose.runtime.Immutable
 import com.coursework.corePresentation.viewState.ComposeList

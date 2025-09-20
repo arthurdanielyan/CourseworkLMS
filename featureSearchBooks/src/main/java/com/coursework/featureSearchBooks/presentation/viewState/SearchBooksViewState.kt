@@ -6,14 +6,14 @@ import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.emptyComposeList
 
 @Immutable
-data class SearchBooksViewState(
+internal data class SearchBooksViewState(
     val searchInput: String = "",
     val books: ComposeList<BookViewState> = emptyComposeList(),
     val dataLoadingState: DataLoadingState = DataLoadingState.Loading,
 )
 
 @Immutable
-data class BookViewState(
+internal data class BookViewState(
     val id: Long,
     val title: String,
     val subtitle: String?,

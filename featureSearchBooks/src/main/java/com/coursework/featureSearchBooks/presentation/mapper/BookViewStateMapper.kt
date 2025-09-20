@@ -5,7 +5,7 @@ import com.coursework.domain.model.Book
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.utils.Mapper
 
-class BookViewStateMapper : Mapper<Book, BookViewState> {
+internal class BookViewStateMapper : Mapper<Book, BookViewState> {
 
     override fun map(from: Book): BookViewState {
         return BookViewState(

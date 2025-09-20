@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import com.coursework.featurelogin.R.string as Strings
 
-class LoginViewModel(
+internal class LoginViewModel(
     private val appRouter: AppRouter,
     private val stringProvider: StringProvider,
 ) : ViewModel(), LoginUiCallbacks {

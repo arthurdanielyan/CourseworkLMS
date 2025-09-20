@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 
 @Immutable
-interface SearchBooksUiCallbacks {
+internal interface SearchBooksUiCallbacks {
 
     fun onSearchQueryType(query: String)
     fun onBookClick(book: BookViewState)

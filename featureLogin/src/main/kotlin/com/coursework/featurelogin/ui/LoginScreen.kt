@@ -83,7 +83,7 @@ private fun LoginScreen(
         PrimaryButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(Strings.login),
-            onClick = callbacks::onLoginAsStudentClick
+            onClick = callbacks::onLoginClick
         )
 
         SpacerHeight(32.dp)

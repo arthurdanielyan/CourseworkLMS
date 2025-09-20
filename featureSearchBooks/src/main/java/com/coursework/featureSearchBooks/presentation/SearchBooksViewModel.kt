@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class SearchBooksViewModel(
+internal class SearchBooksViewModel(
     private val appRouter: AppRouter,
     private val searchBooksUseCase: SearchBooksUseCase,
     private val bookViewStateMapper: BookViewStateMapper,

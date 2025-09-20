@@ -9,6 +9,7 @@ import com.coursework.corePresentation.viewState.emptyComposeList
 internal data class SearchBooksViewState(
     val searchInput: String = "",
     val books: ComposeList<BookViewState> = emptyComposeList(),
+    val showAddBookButton: Boolean = false,
     val dataLoadingState: DataLoadingState = DataLoadingState.Loading,
 )
 

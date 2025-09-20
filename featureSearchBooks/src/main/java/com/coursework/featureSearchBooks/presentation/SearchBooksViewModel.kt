@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.toComposeList
+import com.coursework.domain.model.UserType
+import com.coursework.domain.usecases.GetUserTypeUseCase
 import com.coursework.domain.usecases.SearchBooksUseCase
 import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureSearchBooks.presentation.mapper.BookViewStateMapper
@@ -26,6 +28,7 @@ internal class SearchBooksViewModel(
     private val appRouter: AppRouter,
     private val searchBooksUseCase: SearchBooksUseCase,
     private val bookViewStateMapper: BookViewStateMapper,
+    private val getUserTypeUseCase: GetUserTypeUseCase,
 ) : ViewModel(), SearchBooksUiCallbacks {
 
     private companion object {
@@ -39,24 +42,36 @@ internal class SearchBooksViewModel(
 
     private val searchQuery = MutableStateFlow("")
     private val books = MutableStateFlow(emptyList<BookViewState>())
+    private val showAddBookButton = MutableStateFlow(false)
     private val dataLoadingState = MutableStateFlow(DataLoadingState.Loading)
 
     val uiState = combine(
         searchQuery,
         books,
+        showAddBookButton,
         dataLoadingState,
-    ) { searchQuery, books, dataLoadingState ->
+    ) { searchQuery, books, showAddBookButton, dataLoadingState ->
 
         SearchBooksViewState(
             searchInput = searchQuery,
             books = books.toComposeList(),
+            showAddBookButton = showAddBookButton,
             dataLoadingState = dataLoadingState,
         )
     }.stateInWhileSubscribed(viewModelScope, SearchBooksViewState())
 
     init {
+        getUserType()
         observeQuery()
         onRefresh()
+    }
+
+    private fun getUserType() {
+        viewModelScope.launch {
+            showAddBookButton.update {
+                getUserTypeUseCase() == UserType.Teacher
+            }
+        }
     }
 
     private fun observeQuery() {
@@ -95,6 +110,10 @@ internal class SearchBooksViewModel(
                 id = book.id
             )
         )
+    }
+
+    override fun onAddBookClick() {
+        // TODO: Not yet implemented
     }
 
     override fun onRefresh() {

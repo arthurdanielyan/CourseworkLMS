@@ -53,14 +53,15 @@ internal class LoginViewModel(
 
     override fun onLoginAsStudentClick() {
         // For Testing
+        // TODO: Not yet implemented
+    }
+
+    override fun onLoginAsTeacherClick() {
+        // For Testing
         appRouter.navigate(
             destination = HomeScreenDestination,
             popUpTo = LoginDestination::class,
             inclusive = true,
         )
-    }
-
-    override fun onLoginAsTeacherClick() {
-        // TODO: Not yet implemented
     }
 }

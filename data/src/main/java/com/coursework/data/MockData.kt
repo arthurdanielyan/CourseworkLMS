@@ -6,7 +6,7 @@ object MockData {
 
     val books = listOf(
         Book(
-            id = 11L,
+            id = 1L,
             title = "Kotlin Programming: The Big Nerd Ranch Guide",
             subtitle = null,
             authors = listOf("Josh Skeen", "David Greenhalgh"),
@@ -14,7 +14,7 @@ object MockData {
             hasPdfVersion = true
         ),
         Book(
-            id = 12L,
+            id = 2L,
             title = "Android Programming: The Big Nerd Ranch Guide",
             subtitle = null,
             authors = listOf("Bill Phillips", "Chris Stewart", "Kristin Marsicano"),
@@ -22,7 +22,7 @@ object MockData {
             hasPdfVersion = true
         ),
         Book(
-            id = 13L,
+            id = 3L,
             title = "Pro Android 12",
             subtitle = "Developing Modern Mobile Apps",
             authors = listOf("Dave MacLean", "Satya Komatineni", "Sanjay Singh"),
@@ -30,7 +30,7 @@ object MockData {
             hasPdfVersion = false
         ),
         Book(
-            id = 14L,
+            id = 4L,
             title = "Android Jetpack Compose Essentials",
             subtitle = null,
             authors = listOf("Neil Smyth"),
@@ -38,7 +38,7 @@ object MockData {
             hasPdfVersion = true
         ),
         Book(
-            id = 15L,
+            id = 5L,
             title = "Programming Android",
             subtitle = "Kotlin Edition",
             authors = listOf("Brett McLaughlin"),
@@ -46,7 +46,7 @@ object MockData {
             hasPdfVersion = false
         ),
         Book(
-            id = 16L,
+            id = 6L,
             title = "Head First Android Development",
             subtitle = "A Brain-Friendly Guide",
             authors = listOf("Dawn Griffiths", "David Griffiths"),
@@ -54,7 +54,7 @@ object MockData {
             hasPdfVersion = true
         ),
         Book(
-            id = 17L,
+            id = 7L,
             title = "Effective Kotlin",
             subtitle = "Best Practices for Kotlin Development",
             authors = listOf("Marcin Moskala"),
@@ -62,7 +62,7 @@ object MockData {
             hasPdfVersion = true
         ),
         Book(
-            id = 18L,
+            id = 8L,
             title = "Kotlin Coroutines by Tutorials",
             subtitle = null,
             authors = listOf("Raywenderlich Tutorial Team"),
@@ -70,7 +70,7 @@ object MockData {
             hasPdfVersion = true
         ),
         Book(
-            id = 19L,
+            id = 9L,
             title = "Android Clean Code",
             subtitle = null,
             authors = listOf("Robert C. Martin", "Android Dev Team"),
@@ -78,7 +78,7 @@ object MockData {
             hasPdfVersion = false
         ),
         Book(
-            id = 20L,
+            id = 10L,
             title = "Mastering Android Development",
             subtitle = null,
             authors = listOf("John Horton"),

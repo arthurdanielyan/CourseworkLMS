@@ -4,12 +4,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,30 +53,52 @@ private fun SearchBooksScreen(
     state: SearchBooksViewState,
     callbacks: SearchBooksUiCallbacks
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .systemBarsPadding(),
-    ) {
-        TextField(
-            value = state.searchInput,
-            onValueChange = callbacks::onSearchQueryType,
-            label = stringResource(Strings.search_books),
-            showCleanIcon = true
-        )
-
-
-        LoadingStatePresenter(
+    Scaffold(
+        floatingActionButton = {
+            if(state.showAddBookButton) {
+                IconButton(
+                    modifier = Modifier
+                        .background(
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            shape = CircleShape
+                        ),
+                    onClick = callbacks::onAddBookClick
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Add book",
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+        Column(
             modifier = Modifier
-                .fillMaxSize(),
-            dataLoadingState = state.dataLoadingState,
-            onRefresh = callbacks::onRefresh,
+                .padding(innerPadding)
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .systemBarsPadding(),
         ) {
-            BooksList(
-                books = state.books,
-                onBookClick = callbacks::onBookClick
+            TextField(
+                value = state.searchInput,
+                onValueChange = callbacks::onSearchQueryType,
+                label = stringResource(Strings.search_books),
+                showCleanIcon = true
             )
+
+
+            LoadingStatePresenter(
+                modifier = Modifier
+                    .fillMaxSize(),
+                dataLoadingState = state.dataLoadingState,
+                onRefresh = callbacks::onRefresh,
+            ) {
+                BooksList(
+                    books = state.books,
+                    onBookClick = callbacks::onBookClick
+                )
+            }
         }
     }
 }
@@ -85,8 +115,11 @@ private fun BooksList(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MaterialTheme.colorScheme.secondaryContainer
+                    color = MaterialTheme.colorScheme.surface
                 ),
+            contentPadding = PaddingValues(
+                bottom = 16.dp,
+            ),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             items(books) { book ->

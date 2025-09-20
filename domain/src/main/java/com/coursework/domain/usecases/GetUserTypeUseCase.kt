@@ -6,6 +6,6 @@ class GetUserTypeUseCase {
 
     suspend operator fun invoke(): UserType {
         // TODO: Not yet implemented
-        return UserType.Student
+        return UserType.Teacher
     }
 }

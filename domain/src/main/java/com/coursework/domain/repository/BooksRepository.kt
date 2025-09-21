@@ -7,7 +7,7 @@ interface BooksRepository {
 
     suspend fun getBooks(query: String): Result<List<Book>>
 
-    suspend fun getBookDetails(): Result<BookDetails>
+    suspend fun getBookDetails(bookId: Long): Result<BookDetails>
 
     suspend fun downloadPdf(bookId: Long): Result<Unit>
 }

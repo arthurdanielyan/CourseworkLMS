@@ -16,9 +16,9 @@ class DummyBooksRepository : BooksRepository {
         }
     }
 
-    override suspend fun getBookDetails(): Result<BookDetails> {
+    override suspend fun getBookDetails(bookId: Long): Result<BookDetails> {
         return runCatching {
-            TODO("Not yet implemented")
+            MockData.bookDetails.first { it.id == bookId }
         }
     }
 

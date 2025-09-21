@@ -1,13 +1,13 @@
 package com.coursework.featureBookDetails.presentation.mapper
 
 import com.coursework.domain.model.BookDetails
-import com.coursework.featureBookDetails.presentation.viewState.BookDetailsViewState
+import com.coursework.featureBookDetails.presentation.viewState.BookDetailsUiModel
 import com.coursework.utils.Mapper
 
-internal class BookViewStateMapper : Mapper<BookDetails, BookDetailsViewState> {
+internal class BookDetailsViewStateMapper : Mapper<BookDetails, BookDetailsUiModel> {
 
-    override fun map(from: BookDetails): BookDetailsViewState {
-        return BookDetailsViewState(
+    override fun map(from: BookDetails): BookDetailsUiModel {
+        return BookDetailsUiModel(
             id = from.id,
             title = from.title,
             subtitle = from.subtitle,

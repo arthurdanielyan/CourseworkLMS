@@ -11,6 +11,7 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.core.ktx)
 
     implementation(projects.domain)
 }

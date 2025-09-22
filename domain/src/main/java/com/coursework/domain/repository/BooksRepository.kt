@@ -9,5 +9,5 @@ interface BooksRepository {
 
     suspend fun getBookDetails(bookId: Long): Result<BookDetails>
 
-    suspend fun downloadPdf(bookId: Long): Result<Unit>
+    fun downloadPdf(book: BookDetails): Result<Unit>
 }

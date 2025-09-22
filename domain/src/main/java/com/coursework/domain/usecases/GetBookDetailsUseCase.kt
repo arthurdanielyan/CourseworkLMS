@@ -3,7 +3,7 @@ package com.coursework.domain.usecases
 import com.coursework.domain.model.BookDetails
 import com.coursework.domain.repository.BooksRepository
 
-class GetBookDetails(
+class GetBookDetailsUseCase(
     private val repository: BooksRepository
 ) {
 

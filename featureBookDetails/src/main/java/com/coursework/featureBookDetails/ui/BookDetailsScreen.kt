@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coursework.corePresentation.commonUi.AsyncImage
 import com.coursework.corePresentation.commonUi.LoadingStatePresenter
+import com.coursework.corePresentation.commonUi.PrimaryButton
 import com.coursework.corePresentation.commonUi.topBar.ContentWithTopBarHeader
 import com.coursework.corePresentation.commonUi.topBar.TopBarBackButton
 import com.coursework.featureBookDetails.BookDetailsDestination
@@ -116,14 +117,26 @@ private fun BookDetailsContent(
         }
     ) {
         bookDetailsContent(
-            bookDetails = bookDetails
+            bookDetails = bookDetails,
+            onDownloadPdfClick = callbacks::onDownloadPdfClick
         )
     }
 }
 
 private fun LazyListScope.bookDetailsContent(
     bookDetails: BookDetailsViewState,
+    onDownloadPdfClick: () -> Unit
 ) {
+    if (bookDetails.hasPdfVersion) {
+        item("download") {
+            PrimaryButton(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp),
+                text = stringResource(Strings.download_pdf),
+                onClick = onDownloadPdfClick
+            )
+        }
+    }
     if (bookDetails.isReferenceOnly) {
         item("subtitle") {
             Text(

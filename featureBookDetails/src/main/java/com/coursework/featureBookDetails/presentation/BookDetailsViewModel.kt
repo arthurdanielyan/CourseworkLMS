@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.viewState.DataLoadingState
-import com.coursework.domain.usecases.GetBookDetails
+import com.coursework.domain.model.BookDetails
+import com.coursework.domain.usecases.DownloadPdfUseCase
+import com.coursework.domain.usecases.GetBookDetailsUseCase
 import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureBookDetails.presentation.mapper.BookDetailsViewStateMapper
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScreenViewState
@@ -18,16 +20,19 @@ import kotlinx.coroutines.launch
 internal class BookDetailsViewModel(
     private val destination: BookDetailsDestination,
     private val appRouter: AppRouter,
-    private val getBookDetails: GetBookDetails,
+    private val getBookDetailsUseCase: GetBookDetailsUseCase,
+    private val downloadPdfUseCase: DownloadPdfUseCase,
     private val bookDetailsViewStateMapper: BookDetailsViewStateMapper,
 ) : ViewModel(), BookDetailsUiCallbacks {
 
+    private var bookDetails: BookDetails? = null
+
     private val dataLoadingState = MutableStateFlow(DataLoadingState.Loading)
-    private val bookDetails = MutableStateFlow<BookDetailsViewState?>(null)
+    private val bookDetailsState = MutableStateFlow<BookDetailsViewState?>(null)
 
     val uiState = combine(
         dataLoadingState,
-        bookDetails,
+        bookDetailsState,
     ) { dataLoadingState, bookDetails ->
 
         BookDetailsScreenViewState(
@@ -42,10 +47,11 @@ internal class BookDetailsViewModel(
 
     private fun getBookDetails() {
         viewModelScope.launch {
-            getBookDetails(destination.id)
+            getBookDetailsUseCase(destination.id)
                 .onSuccess { result ->
+                    bookDetails = result
                     dataLoadingState.value = DataLoadingState.Success
-                    bookDetails.update {
+                    bookDetailsState.update {
                         bookDetailsViewStateMapper.map(result)
                     }
                 }
@@ -57,5 +63,11 @@ internal class BookDetailsViewModel(
 
     override fun onBackClick() {
         appRouter.pop()
+    }
+
+    override fun onDownloadPdfClick() {
+        bookDetails?.let {
+            downloadPdfUseCase(it)
+        }
     }
 }

@@ -6,4 +6,5 @@ import androidx.compose.runtime.Immutable
 internal interface BookDetailsUiCallbacks {
 
     fun onBackClick()
+    fun onDownloadPdfClick()
 }

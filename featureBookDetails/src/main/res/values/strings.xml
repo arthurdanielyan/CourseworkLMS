@@ -12,4 +12,5 @@
     <string name="no_available_copies">No copies available</string>
     <string name="language">Language</string>
     <string name="reference_only_message">This book is reference only</string>
+    <string name="download_pdf">Download PDF</string>
 </resources>

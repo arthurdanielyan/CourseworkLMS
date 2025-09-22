@@ -1,11 +1,14 @@
 package com.coursework.data
 
+import com.coursework.data.downloader.Downloader
 import com.coursework.domain.model.Book
 import com.coursework.domain.model.BookDetails
 import com.coursework.domain.repository.BooksRepository
 import kotlinx.coroutines.delay
 
-class DummyBooksRepository : BooksRepository {
+class DummyBooksRepository(
+    val downloader: Downloader,
+) : BooksRepository {
 
     override suspend fun getBooks(query: String): Result<List<Book>> {
         return runCatching {
@@ -22,9 +25,14 @@ class DummyBooksRepository : BooksRepository {
         }
     }
 
-    override suspend fun downloadPdf(bookId: Long): Result<Unit> {
+    override fun downloadPdf(book: BookDetails): Result<Unit> {
         return runCatching {
-            TODO("Not yet implemented")
+            val pdfUrl = book.pdfUrl ?: throw IllegalArgumentException("Book has no pdf url")
+            downloader.downloadFile(
+                url = pdfUrl,
+                mimeType = "application/pdf",
+                title = book.title,
+            )
         }
     }
 }

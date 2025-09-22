@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="description">Description</string>
+    <string name="author">Author</string>
+    <string name="authors">Authors</string>
+    <string name="published_by">Published by</string>
+    <string name="published_in">Published in</string>
+    <string name="edition">Edition</string>
+    <string name="categories">Categories</string>
+    <string name="total_copies">Total copies</string>
+    <string name="available_copies">Available copies</string>
+    <string name="no_available_copies">No copies available</string>
+    <string name="language">Language</string>
+    <string name="reference_only_message">This book is reference only</string>
+</resources>

@@ -1,6 +1,5 @@
 package com.coursework.corePresentation.commonUi.autoSizeText
 
-import android.util.Log
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Constraints
@@ -59,14 +58,8 @@ internal class LinearAutoSizeTextCalculator(
                 )
             ).apply {
                 estimatedSize *= if (didOverflowWidth || didOverflowHeight) {
-                    Log.d("yapping", "too big")
                     (1f - SizeMultiplier)
                 } else if (forceFit) {
-                    Log.d("yapping", "too small")
-                    Log.d(
-                        "yapping",
-                        "width diff: ${abs(this.size.width - containerSize.width)}, minDiff: $minDiff"
-                    )
                     if (
                         abs(this.size.width - containerSize.width) <= minDiff ||
                         abs(this.size.height - containerSize.height) <= minDiff

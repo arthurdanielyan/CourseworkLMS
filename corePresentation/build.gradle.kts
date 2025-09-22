@@ -17,6 +17,7 @@ dependencies {
     api(libs.androidx.compose.ui.tooling.preview)
     api(libs.androidx.compose.material3)
     api(libs.androidx.lifecycle.viewmodel.ktx)
+    api(libs.coil.compose)
 
     implementation(libs.koin.core)
 }

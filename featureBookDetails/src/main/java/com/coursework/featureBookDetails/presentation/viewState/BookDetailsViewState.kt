@@ -4,13 +4,13 @@ import androidx.compose.runtime.Immutable
 import com.coursework.corePresentation.viewState.DataLoadingState
 
 @Immutable
-internal data class BookDetailsViewState(
+internal data class BookDetailsScreenViewState(
     val dataLoadingState: DataLoadingState = DataLoadingState.Loading,
-    val bookDetails: BookDetailsUiModel? = null,
+    val bookDetails: BookDetailsViewState? = null,
 )
 
 @Immutable
-internal data class BookDetailsUiModel(
+internal data class BookDetailsViewState(
     val id: Long,
     val title: String,
     val subtitle: String?,

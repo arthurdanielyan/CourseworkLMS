@@ -1,5 +1,6 @@
 package com.coursework.corePresentation.commonUi.topBar
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
@@ -24,6 +26,10 @@ fun ContentWithTopBarHeader(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    reverseLayout: Boolean = false,
+    verticalArrangement: Arrangement.Vertical =
+        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     header: @Composable () -> Unit,
     content: LazyListScope.() -> Unit,
 ) {
@@ -62,9 +68,12 @@ fun ContentWithTopBarHeader(
             modifier = Modifier
                 .fillMaxWidth(),
             contentPadding = contentPadding,
+            reverseLayout = reverseLayout,
+            verticalArrangement = verticalArrangement,
+            horizontalAlignment = horizontalAlignment,
             state = scrollState,
         ) {
-            item {
+            item(key = "header_slot") {
                 Box(
                     modifier = Modifier
                         .onSizeChanged {

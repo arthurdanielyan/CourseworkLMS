@@ -86,6 +86,7 @@ private fun LoginScreen(
             onClick = callbacks::onLoginClick
         )
 
+        /*
         SpacerHeight(32.dp)
         Text(
             text = "For testing purposes only",
@@ -103,6 +104,7 @@ private fun LoginScreen(
             text = "Simulate login as a teacher",
             onClick = callbacks::onLoginAsTeacherClick
         )
+        */
 
         Spacer(Modifier.weight(1f))
     }

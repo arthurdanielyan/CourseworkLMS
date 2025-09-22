@@ -7,7 +7,7 @@ import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.domain.usecases.GetBookDetails
 import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureBookDetails.presentation.mapper.BookDetailsViewStateMapper
-import com.coursework.featureBookDetails.presentation.viewState.BookDetailsUiModel
+import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScreenViewState
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsViewState
 import com.coursework.utils.stateInWhileSubscribed
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,18 +23,18 @@ internal class BookDetailsViewModel(
 ) : ViewModel(), BookDetailsUiCallbacks {
 
     private val dataLoadingState = MutableStateFlow(DataLoadingState.Loading)
-    private val bookDetails = MutableStateFlow<BookDetailsUiModel?>(null)
+    private val bookDetails = MutableStateFlow<BookDetailsViewState?>(null)
 
     val uiState = combine(
         dataLoadingState,
         bookDetails,
     ) { dataLoadingState, bookDetails ->
 
-        BookDetailsViewState(
+        BookDetailsScreenViewState(
             dataLoadingState = dataLoadingState,
             bookDetails = bookDetails,
         )
-    }.stateInWhileSubscribed(viewModelScope, BookDetailsViewState())
+    }.stateInWhileSubscribed(viewModelScope, BookDetailsScreenViewState())
 
     init {
         getBookDetails()

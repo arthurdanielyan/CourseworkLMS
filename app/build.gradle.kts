@@ -70,4 +70,5 @@ dependencies {
     implementation(projects.featureHome)
     implementation(projects.featureSearchBooks)
     implementation(projects.featureBookDetails)
+    implementation(projects.featureEditBook)
 }

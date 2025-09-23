@@ -15,6 +15,8 @@ import com.coursework.corePresentation.navigation.NavEvent
 import com.coursework.corePresentation.navigation.NavEventHolder
 import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureBookDetails.ui.BookDetailsScreen
+import com.coursework.featureEditBook.EditBookDestination
+import com.coursework.featureEditBook.ui.EditBookScreen
 import com.coursework.featureHome.ui.HomeScreen
 import com.coursework.featureHome.ui.HomeScreenDestination
 import com.coursework.featurelogin.LoginDestination
@@ -50,6 +52,10 @@ internal fun RootNavigation() {
 
         composable<BookDetailsDestination> {
             BookDetailsScreen(it.toRoute())
+        }
+
+        composable<EditBookDestination> {
+            EditBookScreen(it.toRoute())
         }
     }
     ObserveNavEvents(navController)

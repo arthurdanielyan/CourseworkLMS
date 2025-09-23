@@ -22,9 +22,9 @@ import com.coursework.corePresentation.commonUi.autoSizeText.AutoSizeText
 @Composable
 fun TopBarWithBackButton(
     modifier: Modifier = Modifier,
-    alpha: () -> Float,
-    onBackClick: () -> Unit,
     title: String,
+    alpha: () -> Float = { 1f },
+    onBackClick: () -> Unit,
 ) {
     val isVisible by remember {
         derivedStateOf {

@@ -5,6 +5,7 @@ import com.coursework.corePresentation.navigation.di.navigationModule
 import com.coursework.data.di.dataModule
 import com.coursework.domain.di.domainModule
 import com.coursework.featureBookDetails.di.featureBookDetailsModule
+import com.coursework.featureEditBook.di.featureEditBookModule
 import com.coursework.featureHome.di.homeModule
 import com.coursework.featureSearchBooks.di.featureSearchBooksModule
 import com.coursework.featurelogin.di.featureLoginModule
@@ -27,6 +28,7 @@ class IMSApplication : Application() {
                 featureLoginModule,
                 featureSearchBooksModule,
                 featureBookDetailsModule,
+                featureEditBookModule,
             )
         }
     }

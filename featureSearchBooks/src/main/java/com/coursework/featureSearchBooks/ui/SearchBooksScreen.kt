@@ -29,12 +29,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coursework.corePresentation.commonUi.LoadingStatePresenter
 import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.viewState.ComposeList
-import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.featureSearchBooks.presentation.SearchBooksUiCallbacks
 import com.coursework.featureSearchBooks.presentation.SearchBooksViewModel
+import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 import com.coursework.featureSearchBooks.R.string as Strings
 
 @Composable
@@ -62,7 +61,7 @@ private fun SearchBooksScreen(
                             color = MaterialTheme.colorScheme.secondaryContainer,
                             shape = CircleShape
                         ),
-                    onClick = callbacks::onAddBookClick
+                    onClick = callbacks::onAddBookClick,
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,

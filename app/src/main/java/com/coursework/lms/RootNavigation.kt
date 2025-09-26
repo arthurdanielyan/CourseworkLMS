@@ -5,6 +5,7 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,6 +23,14 @@ import com.coursework.featureHome.ui.HomeScreenDestination
 import com.coursework.featurelogin.LoginDestination
 import com.coursework.featurelogin.ui.LoginScreen
 import org.koin.compose.koinInject
+import kotlin.reflect.KClass
+
+private val appScreens = mapOf<KClass<*>, @Composable (NavBackStackEntry) -> Unit>(
+    LoginDestination::class to { LoginScreen() },
+    HomeScreenDestination::class to { HomeScreen() },
+    BookDetailsDestination::class to { BookDetailsScreen(it.toRoute()) },
+    EditBookDestination::class to { EditBookScreen(it.toRoute()) },
+)
 
 @Composable
 internal fun RootNavigation() {
@@ -42,20 +51,10 @@ internal fun RootNavigation() {
             slideOutHorizontally { it }
         }
     ) {
-        composable<LoginDestination> {
-            LoginScreen()
-        }
-
-        composable<HomeScreenDestination> {
-            HomeScreen()
-        }
-
-        composable<BookDetailsDestination> {
-            BookDetailsScreen(it.toRoute())
-        }
-
-        composable<EditBookDestination> {
-            EditBookScreen(it.toRoute())
+        appScreens.forEach { destinationClass, screenContent ->
+            composable(destinationClass) {
+                screenContent(it)
+            }
         }
     }
     ObserveNavEvents(navController)

@@ -28,7 +28,7 @@ internal fun rememberAutoSizeTextCalculator(
     val textMeasurer = rememberTextMeasurer()
     val density = LocalDensity.current
 
-    return remember {
+    return remember(text, forceFit, initialFontSize, maxLines, softWrap) {
         LinearAutoSizeTextCalculator(
             containerSize = containerSize,
             initialFontSize = initialFontSize,

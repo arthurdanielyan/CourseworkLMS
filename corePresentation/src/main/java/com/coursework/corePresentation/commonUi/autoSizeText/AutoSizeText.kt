@@ -54,7 +54,7 @@ fun AutoSizeText(
             maxLines = maxLines,
             softWrap = softWrap,
         )
-        val calculatedFontSize = remember(autoSizeTextCalculator) {
+        val calculatedFontSize = remember(autoSizeTextCalculator, text, forceFit, fontSize, maxLines, softWrap) {
             autoSizeTextCalculator.calculateTextSize()
         }
 

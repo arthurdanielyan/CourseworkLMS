@@ -2,6 +2,7 @@ package com.coursework.lms
 
 import android.app.Application
 import com.coursework.corePresentation.navigation.di.navigationModule
+import com.coursework.corePresentation.systemUtils.di.systemUtils
 import com.coursework.data.di.dataModule
 import com.coursework.domain.di.domainModule
 import com.coursework.featureBookDetails.di.featureBookDetailsModule
@@ -24,6 +25,7 @@ class IMSApplication : Application() {
                 navigationModule,
                 dataModule,
                 domainModule,
+                systemUtils,
                 homeModule,
                 featureLoginModule,
                 featureSearchBooksModule,

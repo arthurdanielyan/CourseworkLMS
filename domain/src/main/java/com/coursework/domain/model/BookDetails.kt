@@ -11,6 +11,7 @@ data class BookDetails(
     val categories: List<String>,
     val hasPdfVersion: Boolean,
     val pdfUrl: String?,
+    val pdfTitle: String?,
     val coverImageUrl: String?,
     val totalCopies: Int,
     val copiesAvailable: Int,

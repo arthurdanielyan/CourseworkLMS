@@ -20,4 +20,7 @@ dependencies {
     api(libs.coil.compose)
 
     implementation(libs.koin.core)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.compose)
 }

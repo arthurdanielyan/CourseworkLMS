@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_book">Add new book</string>
+    <string name="required_fields_annotation">Fields marked with * are required</string>
+    <string name="title_label">Book title *</string>
+    <string name="title_placeholder">Title</string>
+
+    <string name="subtitle_label">Subtitle</string>
+
+    <string name="authors_label">Book authors separated by commas *</string>
+    <string name="authors_placeholder">Authors</string>
+
+    <string name="publisher_label">Publisher</string>
+    <string name="publication_year_label">Publication year</string>
+    <string name="edition_label">Edition</string>
+
+    <string name="categories_label">Book categories separated by commas</string>
+    <string name="categories_placeholder">Categories</string>
+
+    <string name="total_copies_label">Total copies *</string>
+    <string name="total_copies_placeholder">Total copies</string>
+
+    <string name="copies_available_label">Copies available *</string>
+    <string name="copies_available_placeholder">Copies available</string>
+
+    <string name="language_label">Language *</string>
+    <string name="language_placeholder">Language</string>
+
+    <string name="upload_pdf">Upload PDF</string>
+    <string name="upload_cover_image">Upload cover image</string>
+    <string name="cover_uploaded">Cover image uploaded</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="publish">Publish</string>
+    <string name="no_pdf_viewer_app">No PDF viewer app found</string>
 </resources>

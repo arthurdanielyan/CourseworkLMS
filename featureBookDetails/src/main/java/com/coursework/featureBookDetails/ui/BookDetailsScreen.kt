@@ -1,6 +1,5 @@
 package com.coursework.featureBookDetails.ui
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -284,9 +283,6 @@ private fun BookDetailsHeader(
             placeholder = painterResource(Drawables.book_cover_placeholder),
             error = painterResource(Drawables.book_cover_placeholder),
             contentDescription = null,
-            onError = {
-                Log.d("yapping", it.result.throwable.toString())
-            },
             modifier = Modifier
                 .fillMaxWidth()
                 .requiredHeight(headerHeight),

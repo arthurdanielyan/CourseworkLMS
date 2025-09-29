@@ -3,7 +3,6 @@ package com.coursework.featureHome.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,11 +15,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.coursework.corePresentation.Destination
 import com.coursework.corePresentation.extensions.ObserveState
-import com.coursework.featureSearchBooks.SearchBooksDestination
 import com.coursework.featureHome.BottomBarItemViewState
 import com.coursework.featureHome.presentation.HomeUiCallbacks
 import com.coursework.featureHome.presentation.HomeViewModel
 import com.coursework.featureHome.ui.bottomBar.BottomBar
+import com.coursework.featureSearchBooks.SearchBooksDestination
 import com.coursework.featureSearchBooks.ui.SearchBooksScreen
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
@@ -53,7 +52,6 @@ fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .navigationBarsPadding()
     ) {
         NavHost(
             modifier = Modifier.weight(1f),

@@ -1,10 +1,12 @@
 package com.coursework.featureEditBook.presentation.mapper
 
 import com.coursework.domain.model.BookDetails
+import com.coursework.featureEditBook.presentation.BookPdfViewState
+import com.coursework.featureEditBook.presentation.CoverImageViewState
 import com.coursework.featureEditBook.presentation.EditBookDetailsViewState
 import com.coursework.utils.Mapper
 
-class EditBookViewStateMapper : Mapper<BookDetails, EditBookDetailsViewState> {
+internal class EditBookViewStateMapper : Mapper<BookDetails, EditBookDetailsViewState> {
 
     override fun map(from: BookDetails): EditBookDetailsViewState {
         return EditBookDetailsViewState(
@@ -15,8 +17,13 @@ class EditBookViewStateMapper : Mapper<BookDetails, EditBookDetailsViewState> {
             publicationYearInput = from.publicationYear.toString(),
             editionInput = from.edition.orEmpty(),
             categoriesInput = from.categories.joinToString(),
-            pdfUrlInput = from.pdfUrl.toString(),
-            coverImageUrlInput = from.coverImageUrl.toString(),
+            bookPdf = BookPdfViewState(
+                pdfUrl = from.pdfUrl.toString(),
+                displayName = from.pdfTitle.toString(),
+            ),
+            coverImage = CoverImageViewState(
+                url = from.coverImageUrl.toString(),
+            ),
             totalCopiesInput = from.totalCopies.toString(),
             copiesAvailableInput = from.copiesAvailable.toString(),
             languageInput = from.language,

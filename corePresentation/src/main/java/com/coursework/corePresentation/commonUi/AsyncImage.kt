@@ -16,6 +16,7 @@ import coil.compose.DefaultModelEqualityDelegate
 import coil.compose.EqualityDelegate
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import coil.size.Size
 
 @Composable
 fun AsyncImage(
@@ -39,6 +40,7 @@ fun AsyncImage(
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(model)
+            .size(Size.ORIGINAL)
             .memoryCachePolicy(CachePolicy.ENABLED)
             .diskCachePolicy(CachePolicy.DISABLED)
             .build(),

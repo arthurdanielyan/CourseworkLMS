@@ -7,15 +7,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.coursework.corePresentation.commonUi.IconButton
 import com.coursework.corePresentation.commonUi.LoadingStatePresenter
 import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.viewState.ComposeList
@@ -61,20 +59,17 @@ private fun SearchBooksScreen(
                             color = MaterialTheme.colorScheme.secondaryContainer,
                             shape = CircleShape
                         ),
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add a book",
+                    iconSize = 36.dp,
+                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
                     onClick = callbacks::onAddBookClick,
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add book",
-                        tint = MaterialTheme.colorScheme.onSecondaryContainer
-                    )
-                }
+                )
             }
         }
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
                 .systemBarsPadding(),
@@ -85,7 +80,6 @@ private fun SearchBooksScreen(
                 label = stringResource(Strings.search_books),
                 showCleanIcon = true
             )
-
 
             LoadingStatePresenter(
                 modifier = Modifier

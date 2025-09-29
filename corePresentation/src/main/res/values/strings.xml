@@ -3,4 +3,6 @@
     <string name="unknown_error_message">Something went wrong</string>
     <string name="network_error_message">No internet connection</string>
     <string name="refresh">Refresh</string>
+
+    <string name="unknown_error_occurred">Unknown error occurred</string>
 </resources>

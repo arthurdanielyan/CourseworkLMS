@@ -21,7 +21,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
-import com.coursework.featureSearchBooks.R.drawable as Drawables
+import com.coursework.corePresenation.R.drawable as CoreDrawables
 import com.coursework.featureSearchBooks.R.string as Strings
 
 @Composable
@@ -86,7 +86,7 @@ internal fun BookItem(
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     Icon(
-                        imageVector = ImageVector.vectorResource(Drawables.ic_pdf),
+                        imageVector = ImageVector.vectorResource(CoreDrawables.ic_pdf),
                         contentDescription = "PDF Available",
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(16.dp),

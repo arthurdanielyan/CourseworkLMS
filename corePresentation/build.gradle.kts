@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.lms.android.library)
     alias(libs.plugins.lms.uses.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -23,4 +24,5 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.kotlinx.serialization.json)
 }

@@ -25,9 +25,6 @@ import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 
 @Serializable
-object HomeScreenDestination : Destination
-
-@Serializable
 object DummyScreenDestination : Destination
 
 @Composable

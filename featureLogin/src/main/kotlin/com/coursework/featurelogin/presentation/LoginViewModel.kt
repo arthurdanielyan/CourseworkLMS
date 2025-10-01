@@ -3,8 +3,8 @@ package com.coursework.featurelogin.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
-import com.coursework.featureHome.ui.HomeScreenDestination
-import com.coursework.featurelogin.LoginDestination
+import com.coursework.corePresentation.navigation.destinations.HomeScreenDestination
+import com.coursework.corePresentation.navigation.destinations.LoginDestination
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider
 import kotlinx.coroutines.flow.MutableStateFlow

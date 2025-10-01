@@ -14,13 +14,13 @@ import androidx.navigation.toRoute
 import com.coursework.corePresentation.extensions.ComposeCollect
 import com.coursework.corePresentation.navigation.NavEvent
 import com.coursework.corePresentation.navigation.NavEventHolder
+import com.coursework.corePresentation.navigation.destinations.EditBookDestination
+import com.coursework.corePresentation.navigation.destinations.HomeScreenDestination
+import com.coursework.corePresentation.navigation.destinations.LoginDestination
 import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureBookDetails.ui.BookDetailsScreen
-import com.coursework.featureEditBook.EditBookDestination
 import com.coursework.featureEditBook.ui.EditBookScreen
 import com.coursework.featureHome.ui.HomeScreen
-import com.coursework.featureHome.ui.HomeScreenDestination
-import com.coursework.featurelogin.LoginDestination
 import com.coursework.featurelogin.ui.LoginScreen
 import org.koin.compose.koinInject
 import kotlin.reflect.KClass

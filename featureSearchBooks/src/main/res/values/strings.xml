@@ -5,4 +5,5 @@
     <string name="pdf_available">PDF available</string>
     <string name="no_books_found">No books found</string>
     <string name="publisher">Publisher: %1$s</string>
+    <string name="logout">Logout</string>
 </resources>

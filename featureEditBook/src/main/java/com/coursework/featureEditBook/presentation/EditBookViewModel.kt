@@ -4,11 +4,11 @@ import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
+import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.systemUtils.externalActivityLauncher.ExternalActivityLauncher
 import com.coursework.corePresentation.systemUtils.uriResolver.UriResolver
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.domain.usecases.GetBookDetailsUseCase
-import com.coursework.featureEditBook.EditBookDestination
 import com.coursework.featureEditBook.presentation.mapper.EditBookViewStateMapper
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider

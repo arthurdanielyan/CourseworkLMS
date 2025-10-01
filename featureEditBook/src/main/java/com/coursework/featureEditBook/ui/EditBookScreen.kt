@@ -35,7 +35,7 @@ import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.commonUi.topBar.TopBarWithBackButton
 import com.coursework.corePresentation.extensions.ObserveEffects
 import com.coursework.corePresentation.extensions.isKeyboardVisible
-import com.coursework.featureEditBook.EditBookDestination
+import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.featureEditBook.presentation.EditBookUiCallbacks
 import com.coursework.featureEditBook.presentation.EditBookUiEffect
 import com.coursework.featureEditBook.presentation.EditBookViewModel

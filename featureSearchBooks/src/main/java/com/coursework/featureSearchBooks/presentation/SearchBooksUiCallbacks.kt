@@ -9,5 +9,6 @@ internal interface SearchBooksUiCallbacks {
     fun onSearchQueryType(query: String)
     fun onBookClick(book: BookViewState)
     fun onAddBookClick()
+    fun onLogoutClick()
     fun onRefresh()
 }

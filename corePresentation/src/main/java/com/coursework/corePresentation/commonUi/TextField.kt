@@ -7,8 +7,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -33,6 +31,7 @@ fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardType: KeyboardType = KeyboardType.Unspecified,
     errorMessageEnabled: Boolean = false,
+    leadingIcon: @Composable (() -> Unit)? = null,
     showCleanIcon: Boolean = false,
 ) {
     Column(
@@ -72,18 +71,14 @@ fun TextField(
             } else {
                 VisualTransformation.None
             },
+            leadingIcon = leadingIcon,
             trailingIcon = if (showCleanIcon) {
                 {
                     IconButton(
-                        onClick = {
-                            onValueChange("")
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Clear input"
-                        )
-                    }
+                        onClick = { onValueChange("") },
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Clear input"
+                    )
                 }
             } else null
         )

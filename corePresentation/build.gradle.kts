@@ -21,8 +21,10 @@ dependencies {
     api(libs.coil.compose)
 
     implementation(libs.koin.core)
+    implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.navigation.compose)
 }

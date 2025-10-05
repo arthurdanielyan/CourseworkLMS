@@ -12,7 +12,7 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose)
-    implementation(libs.navigation.compose)
+    implementation(libs.navigation.compose) // TODO: remove
     implementation(libs.kotlinx.serialization.json)
 
     implementation(projects.corePresentation)

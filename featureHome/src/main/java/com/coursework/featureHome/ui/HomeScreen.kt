@@ -12,13 +12,18 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.coursework.corePresentation.Destination
 import com.coursework.corePresentation.extensions.ObserveState
+import com.coursework.corePresentation.navigation.nestedNavigation.ListenNavEvents
+import com.coursework.corePresentation.navigation.nestedNavigation.ProvideCurrentNavController
 import com.coursework.featureHome.BottomBarItemViewState
 import com.coursework.featureHome.presentation.HomeUiCallbacks
 import com.coursework.featureHome.presentation.HomeViewModel
 import com.coursework.featureHome.ui.bottomBar.BottomBar
+import com.coursework.featureSearchBooks.BookSearchFiltersDestination
+import com.coursework.featureSearchBooks.BooksListDestination
 import com.coursework.featureSearchBooks.SearchBooksDestination
 import com.coursework.featureSearchBooks.ui.SearchBooksScreen
 import kotlinx.serialization.Serializable
@@ -46,28 +51,41 @@ fun HomeScreen() {
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        NavHost(
-            modifier = Modifier.weight(1f),
-            navController = navController,
-            startDestination = SearchBooksDestination,
+    ProvideCurrentNavController(navController) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
         ) {
-            composable<SearchBooksDestination> {
-                SearchBooksScreen()
-            }
+            NavHost(
+                modifier = Modifier.weight(1f),
+                navController = navController,
+                startDestination = SearchBooksDestination,
+            ) {
+                navigation<SearchBooksDestination>(
+                    startDestination = BooksListDestination
+                ) {
+                    composable<BooksListDestination> {
+                        SearchBooksScreen()
+                    }
 
-            composable<DummyScreenDestination> {
-                DummyScreen()
+                    composable<BookSearchFiltersDestination> {
+                        Box(Modifier.fillMaxSize()) {
+                            Text(text = "Book search filters")
+                        }
+                    }
+                }
+
+                composable<DummyScreenDestination> {
+                    DummyScreen()
+                }
             }
+            ListenNavEvents()
+            BottomBar(
+                bottomBarType = state.bottomBarType,
+                selectedItem = state.selectedItem,
+                onTabSelected = callbacks::onBottomTabSelected
+            )
         }
-        BottomBar(
-            bottomBarType = state.bottomBarType,
-            selectedItem = state.selectedItem,
-            onTabSelected = callbacks::onBottomTabSelected
-        )
     }
 }
 

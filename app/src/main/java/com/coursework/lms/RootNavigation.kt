@@ -3,6 +3,7 @@ package com.coursework.lms
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavBackStackEntry
@@ -17,6 +18,9 @@ import com.coursework.corePresentation.navigation.NavEventHolder
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.navigation.destinations.HomeScreenDestination
 import com.coursework.corePresentation.navigation.destinations.LoginDestination
+import com.coursework.corePresentation.navigation.nestedNavigation.ListenNavEvents
+import com.coursework.corePresentation.navigation.nestedNavigation.LocalNestedNavControllersProvider
+import com.coursework.corePresentation.navigation.nestedNavigation.NestedNavControllers
 import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureBookDetails.ui.BookDetailsScreen
 import com.coursework.featureEditBook.ui.EditBookScreen
@@ -35,29 +39,37 @@ private val appScreens = mapOf<KClass<*>, @Composable (NavBackStackEntry) -> Uni
 @Composable
 internal fun RootNavigation() {
     val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = LoginDestination,
-        enterTransition = {
-            slideInHorizontally { it }
-        },
-        exitTransition = {
-            slideOutHorizontally { -it }
-        },
-        popEnterTransition = {
-            slideInHorizontally { -it }
-        },
-        popExitTransition = {
-            slideOutHorizontally { it }
-        }
+
+    CompositionLocalProvider(
+        LocalNestedNavControllersProvider provides NestedNavControllers(
+            parentNavController = null,
+            currentNavController = navController
+        )
     ) {
-        appScreens.forEach { destinationClass, screenContent ->
-            composable(destinationClass) {
-                screenContent(it)
+        NavHost(
+            navController = navController,
+            startDestination = LoginDestination,
+            enterTransition = {
+                slideInHorizontally { it }
+            },
+            exitTransition = {
+                slideOutHorizontally { -it }
+            },
+            popEnterTransition = {
+                slideInHorizontally { -it }
+            },
+            popExitTransition = {
+                slideOutHorizontally { it }
+            }
+        ) {
+            appScreens.forEach { destinationClass, screenContent ->
+                composable(destinationClass) {
+                    screenContent(it)
+                }
             }
         }
+        ListenNavEvents()
     }
-    ObserveNavEvents(navController)
 }
 
 @Composable

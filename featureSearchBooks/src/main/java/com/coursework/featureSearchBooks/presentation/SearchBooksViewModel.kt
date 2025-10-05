@@ -12,6 +12,7 @@ import com.coursework.domain.model.UserType
 import com.coursework.domain.usecases.GetUserTypeUseCase
 import com.coursework.domain.usecases.SearchBooksUseCase
 import com.coursework.featureBookDetails.BookDetailsDestination
+import com.coursework.featureSearchBooks.BookSearchFiltersDestination
 import com.coursework.featureSearchBooks.presentation.mapper.BookViewStateMapper
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
@@ -113,6 +114,10 @@ internal class SearchBooksViewModel(
                 id = book.id
             )
         )
+    }
+
+    override fun onSearchFiltersClick() {
+        appRouter.navigate(BookSearchFiltersDestination)
     }
 
     override fun onAddBookClick() {

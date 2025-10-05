@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -14,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -27,7 +29,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -41,6 +45,7 @@ import com.coursework.featureSearchBooks.presentation.SearchBooksViewModel
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
 import org.koin.androidx.compose.koinViewModel
+import com.coursework.featureSearchBooks.R.drawable as Drawables
 import com.coursework.featureSearchBooks.R.string as Strings
 
 @Composable
@@ -90,39 +95,24 @@ private fun SearchBooksScreen(
                 value = state.searchInput,
                 onValueChange = callbacks::onSearchQueryType,
                 label = stringResource(Strings.search_books),
-                showCleanIcon = true,
                 leadingIcon = {
-                    IconButton(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Additional actions dropdown",
-                        onClick = { additionalActionsExpanded = true }
+                    SearchFieldLeadingContent(
+                        isAdditionalIconsExpanded = additionalActionsExpanded,
+                        onAdditionalActionsToggle = {
+                            additionalActionsExpanded = it
+                        },
+                        onLogoutClick = {
+                            additionalActionsExpanded = false
+                            callbacks.onLogoutClick()
+                        }
                     )
-                    DropdownMenu(
-                        offset = DpOffset(x = 8.dp, y = 0.dp),
-                        expanded = additionalActionsExpanded,
-                        onDismissRequest = { additionalActionsExpanded = false }
-                    ) {
-                        DropdownMenuItem(
-                            text = {
-                                Text(
-                                    text = stringResource(Strings.logout),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                )
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                                    contentDescription = "Logout"
-                                )
-                            },
-                            onClick = {
-                                additionalActionsExpanded = false
-                                callbacks.onLogoutClick()
-                            }
-                        )
-                    }
-                }
+                },
+                trailingIcon = {
+                    SearchFieldTrailingContent(
+                        onClearQueryClick = { callbacks.onSearchQueryType("") },
+                        onSearchFiltersClick = callbacks::onSearchFiltersClick
+                    )
+                },
             )
 
             LoadingStatePresenter(
@@ -137,6 +127,62 @@ private fun SearchBooksScreen(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun SearchFieldTrailingContent(
+    onClearQueryClick: () -> Unit,
+    onSearchFiltersClick: () -> Unit,
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        IconButton(
+            imageVector = Icons.Default.Close,
+            onClick = onClearQueryClick,
+            contentDescription = "Clear input"
+        )
+        IconButton(
+            imageVector = ImageVector.vectorResource(Drawables.ic_options),
+            onClick = onSearchFiltersClick,
+            contentDescription = "Search filters"
+        )
+    }
+}
+
+@Composable
+private fun SearchFieldLeadingContent(
+    isAdditionalIconsExpanded: Boolean,
+    onAdditionalActionsToggle: (Boolean) -> Unit,
+    onLogoutClick: () -> Unit,
+) {
+    IconButton(
+        imageVector = Icons.Default.MoreVert,
+        contentDescription = "Additional actions dropdown",
+        onClick = { onAdditionalActionsToggle(true) }
+    )
+    DropdownMenu(
+        offset = DpOffset(x = 8.dp, y = 0.dp),
+        expanded = isAdditionalIconsExpanded,
+        onDismissRequest = { onAdditionalActionsToggle(false) }
+    ) {
+        DropdownMenuItem(
+            text = {
+                Text(
+                    text = stringResource(Strings.logout),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = "Logout"
+                )
+            },
+            onClick = onLogoutClick
+        )
     }
 }
 

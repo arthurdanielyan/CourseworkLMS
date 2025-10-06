@@ -3,11 +3,11 @@ package com.coursework.featureBookDetails.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
+import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.domain.model.BookDetails
 import com.coursework.domain.usecases.DownloadPdfUseCase
 import com.coursework.domain.usecases.GetBookDetailsUseCase
-import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureBookDetails.presentation.mapper.BookDetailsViewStateMapper
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScreenViewState
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsViewState

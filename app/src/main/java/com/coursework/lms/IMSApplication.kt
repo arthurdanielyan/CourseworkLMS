@@ -1,7 +1,8 @@
 package com.coursework.lms
 
 import android.app.Application
-import com.coursework.corePresentation.navigation.di.navigationModule
+import com.coursework.corePresentation.navigation.AppRouter
+import com.coursework.corePresentation.navigation.NavControllersHolder
 import com.coursework.corePresentation.systemUtils.di.systemUtils
 import com.coursework.data.di.dataModule
 import com.coursework.domain.di.domainModule
@@ -13,6 +14,7 @@ import com.coursework.featurelogin.di.featureLoginModule
 import com.coursework.utils.stringProvider.stringProviderModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import org.koin.dsl.module
 
 class IMSApplication : Application() {
 
@@ -22,7 +24,16 @@ class IMSApplication : Application() {
             androidContext(applicationContext)
             modules(
                 stringProviderModule,
-                navigationModule,
+//                navigationModule,
+                module {
+                    val appRouter = AppRouterImplV2()
+                    single<AppRouter> {
+                        appRouter
+                    }
+                    single<NavControllersHolder> {
+                        appRouter
+                    }
+                },
                 dataModule,
                 domainModule,
                 systemUtils,

@@ -3,6 +3,7 @@ package com.coursework.featureSearchBooks.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
+import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.navigation.destinations.HomeScreenDestination
 import com.coursework.corePresentation.navigation.destinations.LoginDestination
@@ -11,7 +12,6 @@ import com.coursework.corePresentation.viewState.toComposeList
 import com.coursework.domain.model.UserType
 import com.coursework.domain.usecases.GetUserTypeUseCase
 import com.coursework.domain.usecases.SearchBooksUseCase
-import com.coursework.featureBookDetails.BookDetailsDestination
 import com.coursework.featureSearchBooks.presentation.mapper.BookViewStateMapper
 import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
 import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState

@@ -34,7 +34,7 @@ import com.coursework.corePresentation.commonUi.LoadingStatePresenter
 import com.coursework.corePresentation.commonUi.PrimaryButton
 import com.coursework.corePresentation.commonUi.topBar.ContentWithTopBarHeader
 import com.coursework.corePresentation.commonUi.topBar.TopBarBackButton
-import com.coursework.featureBookDetails.BookDetailsDestination
+import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.featureBookDetails.presentation.BookDetailsUiCallbacks
 import com.coursework.featureBookDetails.presentation.BookDetailsViewModel
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScreenViewState

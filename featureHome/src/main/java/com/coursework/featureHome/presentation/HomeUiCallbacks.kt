@@ -7,4 +7,5 @@ import com.coursework.featureHome.BottomBarItemViewState
 interface HomeUiCallbacks {
 
     fun onBottomTabSelected(item: BottomBarItemViewState)
+    fun onBackClick()
 }

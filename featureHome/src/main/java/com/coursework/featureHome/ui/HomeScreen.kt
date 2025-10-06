@@ -1,5 +1,6 @@
 package com.coursework.featureHome.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,13 +10,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.coursework.corePresentation.Destination
-import com.coursework.corePresentation.extensions.ObserveState
-import com.coursework.featureHome.BottomBarItemViewState
+import com.coursework.corePresentation.navigation.registerNavController
 import com.coursework.featureHome.presentation.HomeUiCallbacks
 import com.coursework.featureHome.presentation.HomeViewModel
 import com.coursework.featureHome.ui.bottomBar.BottomBar
@@ -34,17 +32,7 @@ fun HomeScreen() {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val callbacks: HomeUiCallbacks = viewModel
 
-    val navController = rememberNavController()
-
-    ObserveState(state.selectedItem) { selectedBottomTab ->
-        navController.navigate(selectedBottomTab.toDestination()) {
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
-            }
-            launchSingleTop = true
-            restoreState = true
-        }
-    }
+    val navController = registerNavController(HomeNavigationKey)
 
     Column(
         modifier = Modifier
@@ -60,6 +48,9 @@ fun HomeScreen() {
             }
 
             composable<DummyScreenDestination> {
+                BackHandler {
+                    callbacks.onBackClick()
+                }
                 DummyScreen()
             }
         }
@@ -82,10 +73,4 @@ private fun DummyScreen() {
     }
 }
 
-private fun BottomBarItemViewState.toDestination(): Destination {
-    return when (this) {
-        BottomBarItemViewState.Search -> SearchBooksDestination
-        BottomBarItemViewState.Favourites -> DummyScreenDestination
-        BottomBarItemViewState.MyBooks -> DummyScreenDestination
-    }
-}
+const val HomeNavigationKey = "home_navigation"

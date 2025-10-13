@@ -5,4 +5,8 @@
     <string name="refresh">Refresh</string>
 
     <string name="unknown_error_occurred">Unknown error occurred</string>
+    <string name="author">Author</string>
+    <string name="categories">Categories</string>
+    <string name="publication_year">Publication year</string>
+    <string name="language">Language</string>
 </resources>

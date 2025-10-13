@@ -1,4 +1,4 @@
-package com.coursework.featureSearchBooks.presentation.viewState
+package com.coursework.featureSearchBooks.booksList.viewState
 
 import androidx.compose.runtime.Immutable
 import com.coursework.corePresentation.viewState.ComposeList
@@ -6,7 +6,7 @@ import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.emptyComposeList
 
 @Immutable
-internal data class SearchBooksViewState(
+internal data class BooksListViewState(
     val searchInput: String = "",
     val books: ComposeList<BookViewState> = emptyComposeList(),
     val showAddBookButton: Boolean = false,

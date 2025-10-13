@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.coursework.corePresenation.R.string as CoreStrings
+import com.coursework.corePresentation.R.string as CoreStrings
 import com.coursework.featureEditBook.R.string as Strings
 
 internal class EditBookViewModel(

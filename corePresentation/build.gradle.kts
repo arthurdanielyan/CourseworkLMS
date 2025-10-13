@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.coursework.corePresenation"
+    namespace = "com.coursework.corePresentation"
 }
 
 dependencies {
@@ -21,6 +21,7 @@ dependencies {
     api(libs.coil.compose)
 
     implementation(libs.koin.core)
+    implementation(libs.koin.androidx.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.navigation.compose)
     implementation(libs.androidx.core.ktx)

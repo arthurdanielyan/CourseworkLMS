@@ -13,7 +13,8 @@ import com.coursework.corePresentation.navigation.destinations.HomeScreenDestina
 import com.coursework.corePresentation.navigation.destinations.LoginDestination
 import com.coursework.featureHome.ui.DummyScreenDestination
 import com.coursework.featureHome.ui.HomeNavigationKey
-import com.coursework.featureSearchBooks.SearchBooksDestination
+import com.coursework.featureSearchBooks.searchFilters.SearchFiltersDestination
+import com.coursework.featureSearchBooks.shared.SearchBooksDestination
 import kotlin.reflect.KClass
 
 class AppRouterImplV2 : AppRouter, NavControllersHolder {
@@ -34,6 +35,7 @@ class AppRouterImplV2 : AppRouter, NavControllersHolder {
             is EditBookDestination -> controllers[RootNavigationKey]
 
             SearchBooksDestination,
+            SearchFiltersDestination,
             DummyScreenDestination -> controllers[HomeNavigationKey]
 
             else -> null

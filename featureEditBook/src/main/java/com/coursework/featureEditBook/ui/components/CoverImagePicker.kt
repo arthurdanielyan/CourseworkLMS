@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -38,6 +36,7 @@ import com.coursework.corePresentation.commonUi.MaximizableContent
 import com.coursework.corePresentation.commonUi.SpacerWidth
 import com.coursework.corePresentation.commonUi.modifyIf
 import com.coursework.featureEditBook.presentation.CoverImageViewState
+import com.coursework.corePresentation.R.drawable as CoreDrawables
 import com.coursework.featureEditBook.R.drawable as Drawables
 import com.coursework.featureEditBook.R.string as Strings
 
@@ -79,7 +78,7 @@ internal fun CoverImagePicker(
                                 .padding(16.dp)
                                 .clip(CircleShape)
                                 .background(MaterialTheme.colorScheme.tertiaryContainer),
-                            imageVector = Icons.Default.Close,
+                            imageVector = ImageVector.vectorResource(CoreDrawables.ic_close),
                             contentDescription = "Minimize",
                             onClick = {
                                 isImageMaximized = false

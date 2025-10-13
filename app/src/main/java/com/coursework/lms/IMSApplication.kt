@@ -9,7 +9,9 @@ import com.coursework.domain.di.domainModule
 import com.coursework.featureBookDetails.di.featureBookDetailsModule
 import com.coursework.featureEditBook.di.featureEditBookModule
 import com.coursework.featureHome.di.homeModule
-import com.coursework.featureSearchBooks.di.featureSearchBooksModule
+import com.coursework.featureSearchBooks.booksList.di.booksListModule
+import com.coursework.featureSearchBooks.searchFilters.di.searchFiltersModule
+import com.coursework.featureSearchBooks.shared.di.searchBooksSharedModule
 import com.coursework.featurelogin.di.featureLoginModule
 import com.coursework.utils.stringProvider.stringProviderModule
 import org.koin.android.ext.koin.androidContext
@@ -24,7 +26,6 @@ class IMSApplication : Application() {
             androidContext(applicationContext)
             modules(
                 stringProviderModule,
-//                navigationModule,
                 module {
                     val appRouter = AppRouterImplV2()
                     single<AppRouter> {
@@ -39,8 +40,10 @@ class IMSApplication : Application() {
                 systemUtils,
                 homeModule,
                 featureLoginModule,
-                featureSearchBooksModule,
-                featureBookDetailsModule,
+                booksListModule,
+                searchFiltersModule,
+                searchBooksSharedModule,
+                featureBookDetailsModule, // TODO: remove "feature" prefixes
                 featureEditBookModule,
             )
         }

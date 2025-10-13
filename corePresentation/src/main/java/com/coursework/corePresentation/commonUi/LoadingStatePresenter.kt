@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.coursework.corePresentation.viewState.DataLoadingState
-import com.coursework.corePresenation.R.string as Strings
+import com.coursework.corePresentation.R.string as Strings
 
 
 @Composable

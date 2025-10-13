@@ -20,7 +20,7 @@ fun IconButton(
     modifier: Modifier = Modifier,
     imageVector: ImageVector,
     contentDescription: String?,
-    iconSize: Dp = 28.dp,
+    iconSize: Dp = 22.dp,
     tint: Color = LocalContentColor.current,
     onClick: () -> Unit,
 ) {

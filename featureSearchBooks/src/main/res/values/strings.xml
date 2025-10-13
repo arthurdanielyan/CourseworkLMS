@@ -6,4 +6,11 @@
     <string name="no_books_found">No books found</string>
     <string name="publisher">Publisher: %1$s</string>
     <string name="logout">Logout</string>
+    <string name="show_all">Show all</string>
+    <string name="availability">Availability</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="reference_only">Reference only</string>
+    <string name="added_by">Added by</string>
+    <string name="filters">Filters</string>
 </resources>

@@ -12,13 +12,23 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import com.coursework.corePresentation.Destination
+import com.coursework.corePresentation.extensions.sharedViewModel
+import com.coursework.corePresentation.navigation.EnterTransition
+import com.coursework.corePresentation.navigation.ExitTransition
+import com.coursework.corePresentation.navigation.PopEnterTransition
+import com.coursework.corePresentation.navigation.PopExitTransition
 import com.coursework.corePresentation.navigation.registerNavController
 import com.coursework.featureHome.presentation.HomeUiCallbacks
 import com.coursework.featureHome.presentation.HomeViewModel
 import com.coursework.featureHome.ui.bottomBar.BottomBar
-import com.coursework.featureSearchBooks.SearchBooksDestination
-import com.coursework.featureSearchBooks.ui.SearchBooksScreen
+import com.coursework.featureSearchBooks.booksList.BooksListDestination
+import com.coursework.featureSearchBooks.booksList.ui.SearchBooksScreen
+import com.coursework.featureSearchBooks.searchFilters.SearchFiltersDestination
+import com.coursework.featureSearchBooks.searchFilters.ui.SearchFiltersScreen
+import com.coursework.featureSearchBooks.shared.SearchBooksDestination
+import com.coursework.featureSearchBooks.shared.SearchBooksSharedViewModel
 import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -42,9 +52,29 @@ fun HomeScreen() {
             modifier = Modifier.weight(1f),
             navController = navController,
             startDestination = SearchBooksDestination,
+            enterTransition = { EnterTransition },
+            popEnterTransition = { PopEnterTransition },
+            exitTransition = { ExitTransition },
+            popExitTransition = { PopExitTransition },
         ) {
-            composable<SearchBooksDestination> {
-                SearchBooksScreen()
+            navigation<SearchBooksDestination>(
+                startDestination = BooksListDestination,
+            ) {
+                composable<BooksListDestination> {
+                    val searchBooksSharedViewModel =
+                        it.sharedViewModel<SearchBooksSharedViewModel>(navController)
+                    SearchBooksScreen(
+                        sharedViewModel = searchBooksSharedViewModel
+                    )
+                }
+
+                composable<SearchFiltersDestination> {
+                    val searchBooksSharedViewModel =
+                        it.sharedViewModel<SearchBooksSharedViewModel>(navController)
+                    SearchFiltersScreen(
+                        sharedViewModel = searchBooksSharedViewModel
+                    )
+                }
             }
 
             composable<DummyScreenDestination> {

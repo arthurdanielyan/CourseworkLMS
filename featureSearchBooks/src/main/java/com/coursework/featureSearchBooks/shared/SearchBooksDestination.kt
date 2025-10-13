@@ -1,4 +1,4 @@
-package com.coursework.featureSearchBooks
+package com.coursework.featureSearchBooks.shared
 
 import com.coursework.corePresentation.Destination
 import kotlinx.serialization.Serializable

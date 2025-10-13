@@ -9,7 +9,7 @@ import com.coursework.domain.usecases.GetUserTypeUseCase
 import com.coursework.featureHome.BottomBarItemViewState
 import com.coursework.featureHome.BottomBarType
 import com.coursework.featureHome.ui.DummyScreenDestination
-import com.coursework.featureSearchBooks.SearchBooksDestination
+import com.coursework.featureSearchBooks.shared.SearchBooksDestination
 import com.coursework.utils.stateInWhileSubscribed
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine

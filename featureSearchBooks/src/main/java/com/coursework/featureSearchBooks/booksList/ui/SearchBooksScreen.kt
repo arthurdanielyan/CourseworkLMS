@@ -1,12 +1,14 @@
-package com.coursework.featureSearchBooks.ui
+package com.coursework.featureSearchBooks.booksList.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,7 +16,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -27,7 +28,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -36,16 +39,21 @@ import com.coursework.corePresentation.commonUi.IconButton
 import com.coursework.corePresentation.commonUi.LoadingStatePresenter
 import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.viewState.ComposeList
-import com.coursework.featureSearchBooks.presentation.SearchBooksUiCallbacks
-import com.coursework.featureSearchBooks.presentation.SearchBooksViewModel
-import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
-import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
+import com.coursework.featureSearchBooks.booksList.BooksListUiCallbacks
+import com.coursework.featureSearchBooks.booksList.BooksListViewModel
+import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
+import com.coursework.featureSearchBooks.booksList.viewState.BooksListViewState
+import com.coursework.featureSearchBooks.shared.SearchBooksSharedViewModel
 import org.koin.androidx.compose.koinViewModel
+import com.coursework.corePresentation.R.drawable as CoreDrawables
+import com.coursework.featureSearchBooks.R.drawable as Drawables
 import com.coursework.featureSearchBooks.R.string as Strings
 
 @Composable
-fun SearchBooksScreen() {
-    val viewModel = koinViewModel<SearchBooksViewModel>()
+fun SearchBooksScreen(
+    sharedViewModel: SearchBooksSharedViewModel,
+) {
+    val viewModel = koinViewModel<BooksListViewModel>()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     SearchBooksScreen(
@@ -56,8 +64,8 @@ fun SearchBooksScreen() {
 
 @Composable
 private fun SearchBooksScreen(
-    state: SearchBooksViewState,
-    callbacks: SearchBooksUiCallbacks
+    state: BooksListViewState,
+    callbacks: BooksListUiCallbacks
 ) {
     var additionalActionsExpanded by rememberSaveable {
         mutableStateOf(false)
@@ -90,39 +98,24 @@ private fun SearchBooksScreen(
                 value = state.searchInput,
                 onValueChange = callbacks::onSearchQueryType,
                 label = stringResource(Strings.search_books),
-                showCleanIcon = true,
                 leadingIcon = {
-                    IconButton(
-                        imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Additional actions dropdown",
-                        onClick = { additionalActionsExpanded = true }
+                    SearchFieldLeadingContent(
+                        isAdditionalIconsExpanded = additionalActionsExpanded,
+                        onAdditionalActionsToggle = {
+                            additionalActionsExpanded = it
+                        },
+                        onLogoutClick = {
+                            additionalActionsExpanded = false
+                            callbacks.onLogoutClick()
+                        }
                     )
-                    DropdownMenu(
-                        offset = DpOffset(x = 8.dp, y = 0.dp),
-                        expanded = additionalActionsExpanded,
-                        onDismissRequest = { additionalActionsExpanded = false }
-                    ) {
-                        DropdownMenuItem(
-                            text = {
-                                Text(
-                                    text = stringResource(Strings.logout),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                )
-                            },
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                                    contentDescription = "Logout"
-                                )
-                            },
-                            onClick = {
-                                additionalActionsExpanded = false
-                                callbacks.onLogoutClick()
-                            }
-                        )
-                    }
-                }
+                },
+                trailingIcon = {
+                    SearchFieldTrailingContent(
+                        onClearQueryClick = { callbacks.onSearchQueryType("") },
+                        onSearchFiltersClick = callbacks::onSearchFiltersClick
+                    )
+                },
             )
 
             LoadingStatePresenter(
@@ -137,6 +130,63 @@ private fun SearchBooksScreen(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun SearchFieldTrailingContent(
+    onClearQueryClick: () -> Unit,
+    onSearchFiltersClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier.padding(end = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        IconButton(
+            imageVector = ImageVector.vectorResource(CoreDrawables.ic_close),
+            onClick = onClearQueryClick,
+            contentDescription = "Clear input"
+        )
+        IconButton(
+            imageVector = ImageVector.vectorResource(Drawables.ic_options),
+            onClick = onSearchFiltersClick,
+            contentDescription = "Search filters"
+        )
+    }
+}
+
+@Composable
+private fun SearchFieldLeadingContent(
+    isAdditionalIconsExpanded: Boolean,
+    onAdditionalActionsToggle: (Boolean) -> Unit,
+    onLogoutClick: () -> Unit,
+) {
+    IconButton(
+        imageVector = ImageVector.vectorResource(CoreDrawables.ic_more),
+        contentDescription = "Additional actions dropdown",
+        onClick = { onAdditionalActionsToggle(true) }
+    )
+    DropdownMenu(
+        offset = DpOffset(x = 8.dp, y = 0.dp),
+        expanded = isAdditionalIconsExpanded,
+        onDismissRequest = { onAdditionalActionsToggle(false) }
+    ) {
+        DropdownMenuItem(
+            text = {
+                Text(
+                    text = stringResource(Strings.logout),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = "Logout"
+                )
+            },
+            onClick = onLogoutClick
+        )
     }
 }
 

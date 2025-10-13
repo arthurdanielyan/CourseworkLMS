@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -32,7 +30,7 @@ fun TextField(
     keyboardType: KeyboardType = KeyboardType.Unspecified,
     errorMessageEnabled: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
-    showCleanIcon: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     Column(
         modifier = modifier,
@@ -72,15 +70,7 @@ fun TextField(
                 VisualTransformation.None
             },
             leadingIcon = leadingIcon,
-            trailingIcon = if (showCleanIcon) {
-                {
-                    IconButton(
-                        onClick = { onValueChange("") },
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Clear input"
-                    )
-                }
-            } else null
+            trailingIcon = trailingIcon,
         )
         if (errorMessageEnabled) {
             Text(

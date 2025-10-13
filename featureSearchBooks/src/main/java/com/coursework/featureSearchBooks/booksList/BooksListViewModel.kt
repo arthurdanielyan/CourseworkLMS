@@ -1,4 +1,4 @@
-package com.coursework.featureSearchBooks.presentation
+package com.coursework.featureSearchBooks.booksList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,9 +12,10 @@ import com.coursework.corePresentation.viewState.toComposeList
 import com.coursework.domain.model.UserType
 import com.coursework.domain.usecases.GetUserTypeUseCase
 import com.coursework.domain.usecases.SearchBooksUseCase
-import com.coursework.featureSearchBooks.presentation.mapper.BookViewStateMapper
-import com.coursework.featureSearchBooks.presentation.viewState.BookViewState
-import com.coursework.featureSearchBooks.presentation.viewState.SearchBooksViewState
+import com.coursework.featureSearchBooks.booksList.mapper.BookViewStateMapper
+import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
+import com.coursework.featureSearchBooks.booksList.viewState.BooksListViewState
+import com.coursework.featureSearchBooks.searchFilters.SearchFiltersDestination
 import com.coursework.utils.mapList
 import com.coursework.utils.stateInWhileSubscribed
 import kotlinx.coroutines.channels.BufferOverflow
@@ -27,12 +28,12 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-internal class SearchBooksViewModel(
+internal class BooksListViewModel(
     private val appRouter: AppRouter,
     private val searchBooksUseCase: SearchBooksUseCase,
     private val bookViewStateMapper: BookViewStateMapper,
     private val getUserTypeUseCase: GetUserTypeUseCase,
-) : ViewModel(), SearchBooksUiCallbacks {
+) : ViewModel(), BooksListUiCallbacks {
 
     private companion object {
         private const val SearchQueryDebounce = 300L
@@ -55,13 +56,13 @@ internal class SearchBooksViewModel(
         dataLoadingState,
     ) { searchQuery, books, showAddBookButton, dataLoadingState ->
 
-        SearchBooksViewState(
+        BooksListViewState(
             searchInput = searchQuery,
             books = books.toComposeList(),
             showAddBookButton = showAddBookButton,
             dataLoadingState = dataLoadingState,
         )
-    }.stateInWhileSubscribed(viewModelScope, SearchBooksViewState())
+    }.stateInWhileSubscribed(viewModelScope, BooksListViewState())
 
     init {
         getUserType()
@@ -113,6 +114,10 @@ internal class SearchBooksViewModel(
                 id = book.id
             )
         )
+    }
+
+    override fun onSearchFiltersClick() {
+        appRouter.navigate(SearchFiltersDestination)
     }
 
     override fun onAddBookClick() {

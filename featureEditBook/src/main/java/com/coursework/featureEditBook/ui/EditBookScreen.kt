@@ -44,6 +44,7 @@ import com.coursework.featureEditBook.ui.components.CoverImagePicker
 import com.coursework.featureEditBook.ui.components.PdfPicker
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import com.coursework.corePresentation.R.string as CoreStrings
 import com.coursework.featureEditBook.R.string as Strings
 
 @Composable
@@ -182,7 +183,7 @@ private fun EditBookScreenContent(
             onValueChange = callbacks::onPublicationYearType,
             keyboardType = KeyboardType.Number,
             modifier = Modifier.fillMaxWidth(),
-            label = stringResource(Strings.publication_year_label),
+            label = stringResource(CoreStrings.publication_year),
             isError = state.details.isPublicationYearInputValid.not(),
             errorMessageEnabled = true,
         )

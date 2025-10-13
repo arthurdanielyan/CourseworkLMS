@@ -11,7 +11,6 @@
     <string name="authors_placeholder">Authors</string>
 
     <string name="publisher_label">Publisher</string>
-    <string name="publication_year_label">Publication year</string>
     <string name="edition_label">Edition</string>
 
     <string name="categories_label">Book categories separated by commas</string>

@@ -41,6 +41,7 @@ import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScree
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsViewState
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
+import com.coursework.corePresentation.R.string as CoreStrings
 import com.coursework.featureBookDetails.R.drawable as Drawables
 import com.coursework.featureBookDetails.R.string as Strings
 
@@ -160,7 +161,7 @@ private fun LazyListScope.bookDetailsContent(
             BookDetailBlock(
                 title = stringResource(
                     if (bookDetails.authors.size > 1) Strings.authors
-                    else Strings.author
+                    else CoreStrings.author
                 ),
                 detail = bookDetails.authors.joinToString(),
             )
@@ -201,7 +202,7 @@ private fun LazyListScope.bookDetailsContent(
     if (bookDetails.categories.isNotEmpty()) {
         item("categories") {
             BookDetailBlock(
-                title = stringResource(Strings.categories),
+                title = stringResource(CoreStrings.categories),
                 detail = bookDetails.categories.joinToString(),
             )
         }
@@ -230,7 +231,7 @@ private fun LazyListScope.bookDetailsContent(
     }
     item("language") {
         BookDetailBlock(
-            title = stringResource(Strings.language),
+            title = stringResource(CoreStrings.language),
             detail = bookDetails.language,
         )
     }

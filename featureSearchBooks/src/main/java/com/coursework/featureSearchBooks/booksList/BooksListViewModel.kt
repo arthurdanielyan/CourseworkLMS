@@ -1,11 +1,11 @@
 package com.coursework.featureSearchBooks.booksList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
-import com.coursework.corePresentation.navigation.destinations.HomeScreenDestination
 import com.coursework.corePresentation.navigation.destinations.LoginDestination
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.toComposeList
@@ -16,6 +16,7 @@ import com.coursework.featureSearchBooks.booksList.mapper.BookViewStateMapper
 import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 import com.coursework.featureSearchBooks.booksList.viewState.BooksListViewState
 import com.coursework.featureSearchBooks.searchFilters.SearchFiltersDestination
+import com.coursework.featureSearchBooks.shared.SearchFilters
 import com.coursework.utils.mapList
 import com.coursework.utils.stateInWhileSubscribed
 import kotlinx.coroutines.channels.BufferOverflow
@@ -104,6 +105,11 @@ internal class BooksListViewModel(
         }
     }
 
+    override fun onGetFilterResult(filters: SearchFilters) {
+        // TODO: recall API endpoint with filters
+        Log.d("yapping", "onGetFilterResult: $filters")
+    }
+
     override fun onSearchQueryType(query: String) {
         searchQuery.update { query }
     }
@@ -132,8 +138,7 @@ internal class BooksListViewModel(
         // TODO: Implement logout logic
         appRouter.navigate(
             destination = LoginDestination,
-            popUpTo = HomeScreenDestination::class,
-            inclusive = true,
+            popAll = true,
         )
     }
 

@@ -77,7 +77,7 @@ data class SearchFiltersViewState(
             ),
             FilterViewState(
                 id = 3,
-                displayName = "R. Hakobyan",
+                displayName = "Tomeyan",
                 isSelected = false,
             ),
             FilterViewState(

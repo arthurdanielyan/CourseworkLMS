@@ -4,17 +4,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.viewState.toComposeList
+import com.coursework.featureSearchBooks.searchFilters.mapper.SearchFiltersResultMapper
 import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
 import com.coursework.featureSearchBooks.searchFilters.viewState.SearchFiltersViewState
+import com.coursework.featureSearchBooks.shared.SearchFilters
 import com.coursework.utils.combine
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import com.coursework.featureSearchBooks.R.string as Strings
 
 class SearchFiltersViewModel(
     private val stringProvider: StringProvider,
+    private val searchFiltersResultMapper: SearchFiltersResultMapper,
     private val appRouter: AppRouter,
 ) : ViewModel(), SearchFiltersUiCallbacks {
 
@@ -24,13 +29,15 @@ class SearchFiltersViewModel(
         const val REFERENCE_ONLY_FILTER_ID = 3
     }
 
+    private val _uiEffects = Channel<SearchFiltersUiEffect>(Channel.BUFFERED)
+    val uiEffects = _uiEffects.receiveAsFlow()
+
     private val authorInput = MutableStateFlow("")
     private val publicationYearInput = MutableStateFlow("")
     private val topCategories = MutableStateFlow(SearchFiltersViewState.MockCategories)
     private val topLanguages = MutableStateFlow(SearchFiltersViewState.MockLanguages)
     private val availabilities = MutableStateFlow(getAvailabilityFilters())
     private val topTeachers = MutableStateFlow(SearchFiltersViewState.MockTeachers)
-
 
     val uiState = combine(
         authorInput,
@@ -76,8 +83,36 @@ class SearchFiltersViewModel(
         )
     }
 
-    override fun onBackClick() {
+    private fun List<FilterViewState>.toggleSelectedStates(
+        selectedIds: List<Int>
+    ): List<FilterViewState> {
+        return map { filterViewState ->
+            if (selectedIds.contains(filterViewState.id)) {
+                filterViewState.copy(isSelected = true)
+            } else {
+                filterViewState
+            }
+        }
+    }
+
+    override fun emitInitialFilters(filters: SearchFilters) {
+        authorInput.update { filters.author.orEmpty() }
+        publicationYearInput.update { filters.publicationYear?.toString().orEmpty() }
+        topCategories.update { it.toggleSelectedStates(filters.selectedCategoryIds) }
+        availabilities.update { it.toggleSelectedStates(filters.selectedAvailabilityIds) }
+        topTeachers.update { it.toggleSelectedStates(filters.selectedTeacherIds) }
+    }
+
+    override fun onResultSent() {
         appRouter.pop()
+    }
+
+    override fun onBackClick() {
+        _uiEffects.trySend(
+            SearchFiltersUiEffect.SetResult(
+                filters = searchFiltersResultMapper.map(uiState.value)
+            )
+        )
     }
 
     override fun onAuthorType(value: String) {

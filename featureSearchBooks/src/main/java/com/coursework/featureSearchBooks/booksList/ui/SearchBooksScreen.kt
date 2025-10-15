@@ -38,6 +38,7 @@ import com.coursework.corePresentation.commonUi.ContentWithFab
 import com.coursework.corePresentation.commonUi.IconButton
 import com.coursework.corePresentation.commonUi.LoadingStatePresenter
 import com.coursework.corePresentation.commonUi.TextField
+import com.coursework.corePresentation.extensions.ComposeCollect
 import com.coursework.corePresentation.viewState.ComposeList
 import com.coursework.featureSearchBooks.booksList.BooksListUiCallbacks
 import com.coursework.featureSearchBooks.booksList.BooksListViewModel
@@ -55,6 +56,10 @@ fun SearchBooksScreen(
 ) {
     val viewModel = koinViewModel<BooksListViewModel>()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    ComposeCollect(sharedViewModel.searchFilters) {
+        viewModel.onGetFilterResult(it)
+    }
 
     SearchBooksScreen(
         state = state,

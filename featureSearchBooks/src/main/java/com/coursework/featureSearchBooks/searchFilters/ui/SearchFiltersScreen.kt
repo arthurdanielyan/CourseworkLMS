@@ -18,7 +18,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coursework.corePresentation.commonUi.SpacerHeight
 import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.commonUi.topBar.TopBarWithBackButton
+import com.coursework.corePresentation.extensions.ObserveEffects
+import com.coursework.corePresentation.extensions.OnLifecycleEvents
 import com.coursework.featureSearchBooks.searchFilters.SearchFiltersUiCallbacks
+import com.coursework.featureSearchBooks.searchFilters.SearchFiltersUiEffect
 import com.coursework.featureSearchBooks.searchFilters.SearchFiltersViewModel
 import com.coursework.featureSearchBooks.searchFilters.viewState.SearchFiltersViewState
 import com.coursework.featureSearchBooks.shared.SearchBooksSharedViewModel
@@ -30,9 +33,23 @@ import com.coursework.featureSearchBooks.R.string as Strings
 fun SearchFiltersScreen(
     sharedViewModel: SearchBooksSharedViewModel,
 ) {
-
     val viewModel = koinViewModel<SearchFiltersViewModel>()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    OnLifecycleEvents {
+        onCreate {
+            viewModel.emitInitialFilters(sharedViewModel.searchFilters.value)
+        }
+    }
+
+    ObserveEffects(viewModel.uiEffects) { effect ->
+        when (effect) {
+            is SearchFiltersUiEffect.SetResult -> {
+                sharedViewModel.setResult(effect.filters)
+                viewModel.onResultSent()
+            }
+        }
+    }
 
     SearchFiltersScreen(
         state = state,

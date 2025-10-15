@@ -23,6 +23,7 @@ class AppRouterImplV2 : AppRouter, NavControllersHolder {
 
     override fun <T : Destination> navigate(
         destination: T,
+        popAll: Boolean,
         popUpTo: KClass<*>?,
         popUpToStart: Boolean,
         inclusive: Boolean,
@@ -43,8 +44,15 @@ class AppRouterImplV2 : AppRouter, NavControllersHolder {
 
         controller?.navigate(destination) {
             when {
+                popAll -> {
+                    popUpTo(controller.graph.id) {
+                        this.inclusive = false
+                        this.saveState = false
+                    }
+                }
+
                 popUpToStart -> popUpTo(controller.graph.findStartDestination().id) {
-                    this.inclusive = inclusive
+                    this.inclusive = false
                     this.saveState = saveState
                 }
 

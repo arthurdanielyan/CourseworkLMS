@@ -3,6 +3,7 @@ package com.coursework.data.downloader
 import android.app.DownloadManager
 import android.content.Context
 import android.os.Environment
+import android.webkit.MimeTypeMap
 import androidx.core.net.toUri
 
 class AndroidDownloader(
@@ -31,12 +32,30 @@ class AndroidDownloader(
         }
         cursor.close()
 
+        // Get file extension
+        val extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType)
+            ?: url.substringAfterLast('.', missingDelimiterValue = "")
+                .substringBefore('?')
+
+        val safeTitle = sanitizeFileName(title)
+
+        // Add extension if not already included
+        val fileName = if (safeTitle.endsWith(".$extension") || extension.isEmpty()) {
+            safeTitle.substring(0, 35)
+        } else {
+            "$safeTitle.$extension"
+        }
+
         val request = DownloadManager.Request(url.toUri())
             .setMimeType(mimeType)
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setTitle(title)
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)
 
         return downloadManager.enqueue(request)
+    }
+
+    private fun sanitizeFileName(name: String): String {
+        return name.replace(Regex("[\\\\/:*?\"<>|%#&+]"), "-")
     }
 }

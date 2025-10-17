@@ -1,8 +1,5 @@
-package com.coursework.featureSearchBooks.shared
+package com.coursework.domain.model
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
 data class SearchFilters(
     val author: String? = null,
     val publicationYear: Int? = null,

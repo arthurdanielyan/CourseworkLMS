@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.viewState.toComposeList
+import com.coursework.domain.model.SearchFilters
 import com.coursework.featureSearchBooks.searchFilters.mapper.SearchFiltersResultMapper
 import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
 import com.coursework.featureSearchBooks.searchFilters.viewState.SearchFiltersViewState
-import com.coursework.featureSearchBooks.shared.SearchFilters
 import com.coursework.utils.combine
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider

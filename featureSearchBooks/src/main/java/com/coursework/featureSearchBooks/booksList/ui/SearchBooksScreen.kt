@@ -11,19 +11,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -34,12 +38,17 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.coursework.corePresentation.commonUi.ContentWithFab
 import com.coursework.corePresentation.commonUi.IconButton
 import com.coursework.corePresentation.commonUi.LoadingStatePresenter
+import com.coursework.corePresentation.commonUi.PrimaryButton
 import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.extensions.ComposeCollect
-import com.coursework.corePresentation.viewState.ComposeList
+import com.coursework.corePresentation.viewState.DataLoadingState
+import com.coursework.corePresentation.viewState.toDataLoadingState
 import com.coursework.featureSearchBooks.booksList.BooksListUiCallbacks
 import com.coursework.featureSearchBooks.booksList.BooksListViewModel
 import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
@@ -56,6 +65,7 @@ fun SearchBooksScreen(
 ) {
     val viewModel = koinViewModel<BooksListViewModel>()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val books = viewModel.booksPagingSource.collectAsLazyPagingItems()
 
     ComposeCollect(sharedViewModel.searchFilters) {
         viewModel.onGetFilterResult(it)
@@ -63,6 +73,7 @@ fun SearchBooksScreen(
 
     SearchBooksScreen(
         state = state,
+        booksPagingItems = books,
         callbacks = viewModel
     )
 }
@@ -70,6 +81,7 @@ fun SearchBooksScreen(
 @Composable
 private fun SearchBooksScreen(
     state: BooksListViewState,
+    booksPagingItems: LazyPagingItems<BookViewState>,
     callbacks: BooksListUiCallbacks
 ) {
     var additionalActionsExpanded by rememberSaveable {
@@ -77,7 +89,7 @@ private fun SearchBooksScreen(
     }
     ContentWithFab(
         floatingActionButton = {
-            if(state.showAddBookButton) {
+            if (state.showAddBookButton) {
                 IconButton(
                     modifier = Modifier
                         .background(
@@ -123,14 +135,15 @@ private fun SearchBooksScreen(
                 },
             )
 
+            val initialDataLoadingState by booksPagingItems.initialDataLoadingState()
             LoadingStatePresenter(
                 modifier = Modifier
                     .fillMaxSize(),
-                dataLoadingState = state.dataLoadingState,
+                dataLoadingState = initialDataLoadingState,
                 onRefresh = callbacks::onRefresh,
             ) {
                 BooksList(
-                    books = state.books,
+                    booksPagingItems = booksPagingItems,
                     onBookClick = callbacks::onBookClick
                 )
             }
@@ -197,10 +210,16 @@ private fun SearchFieldLeadingContent(
 
 @Composable
 private fun BooksList(
-    books: ComposeList<BookViewState>,
+    booksPagingItems: LazyPagingItems<BookViewState>,
     onBookClick: (BookViewState) -> Unit,
 ) {
-    if (books.isEmpty()) {
+    val isEmpty by remember(booksPagingItems.loadState.refresh, booksPagingItems.itemSnapshotList) {
+        mutableStateOf(
+            booksPagingItems.loadState.refresh is LoadState.NotLoading &&
+                    booksPagingItems.itemSnapshotList.isEmpty()
+        )
+    }
+    if (isEmpty) {
         NoBooksFoundView()
     } else {
         LazyColumn(
@@ -212,9 +231,11 @@ private fun BooksList(
             contentPadding = PaddingValues(
                 bottom = 16.dp,
             ),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(books) { book ->
+            items(booksPagingItems.itemCount) { index ->
+                val book = booksPagingItems[index] ?: return@items
                 BookItem(
                     book = book,
                     onClick = {
@@ -222,7 +243,32 @@ private fun BooksList(
                     }
                 )
             }
+
+            booksListBottomContent(
+                booksPagingItems = booksPagingItems
+            )
         }
+    }
+}
+
+private fun LazyListScope.booksListBottomContent(
+    booksPagingItems: LazyPagingItems<BookViewState>
+) {
+    when (booksPagingItems.loadState.append) {
+        is LoadState.Loading ->
+            item {
+                CircularProgressIndicator()
+            }
+
+        is LoadState.Error ->
+            item {
+                PrimaryButton(
+                    text = stringResource(Strings.retry),
+                    onClick = booksPagingItems::retry
+                )
+            }
+
+        else -> Unit
     }
 }
 
@@ -239,5 +285,17 @@ private fun NoBooksFoundView() {
             style = MaterialTheme.typography.headlineLarge,
         )
     }
+}
 
+@Composable
+fun <T : Any> LazyPagingItems<T>.initialDataLoadingState(): State<DataLoadingState> {
+    return remember {
+        derivedStateOf {
+            when (loadState.refresh) {
+                is LoadState.Loading -> DataLoadingState.Loading
+                is LoadState.Error -> (loadState.refresh as LoadState.Error).error.toDataLoadingState()
+                else -> DataLoadingState.Success
+            }
+        }
+    }
 }

@@ -1,6 +1,6 @@
 package com.coursework.featureEditBook.presentation.mapper
 
-import com.coursework.domain.model.BookDetails
+import com.coursework.domain.model.books.BookDetails
 import com.coursework.featureEditBook.presentation.BookPdfViewState
 import com.coursework.featureEditBook.presentation.CoverImageViewState
 import com.coursework.featureEditBook.presentation.EditBookDetailsViewState

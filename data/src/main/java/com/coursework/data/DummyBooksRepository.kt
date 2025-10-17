@@ -1,8 +1,10 @@
 package com.coursework.data
 
 import com.coursework.data.downloader.Downloader
-import com.coursework.domain.model.Book
-import com.coursework.domain.model.BookDetails
+import com.coursework.domain.model.PagingLimit
+import com.coursework.domain.model.SearchFilters
+import com.coursework.domain.model.books.BookDetails
+import com.coursework.domain.model.books.BookPaginationResult
 import com.coursework.domain.repository.BooksRepository
 import kotlinx.coroutines.delay
 
@@ -10,12 +12,23 @@ class DummyBooksRepository(
     val downloader: Downloader,
 ) : BooksRepository {
 
-    override suspend fun getBooks(query: String): Result<List<Book>> {
+    override suspend fun getBooks(
+        query: String,
+        filters: SearchFilters,
+        pagingLimit: PagingLimit,
+    ): Result<BookPaginationResult> {
         return runCatching {
-            delay(1500) // Simulate network delay
-            MockData.books.filter {
-                it.title.lowercase().contains(query.lowercase())
-            }
+            delay(1000)
+            val filtered =
+                MockData.books.filter { it.title.lowercase().contains(query.lowercase()) }
+            BookPaginationResult(
+                books = filtered
+                    .subList(
+                        fromIndex = pagingLimit.offset,
+                        toIndex = (pagingLimit.offset + pagingLimit.limit).coerceAtMost(filtered.size)
+                    ),
+                isEndReached = pagingLimit.offset + pagingLimit.limit >= filtered.size,
+            )
         }
     }
 

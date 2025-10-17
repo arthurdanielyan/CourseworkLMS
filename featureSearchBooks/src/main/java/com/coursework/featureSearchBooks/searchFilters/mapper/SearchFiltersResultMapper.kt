@@ -1,8 +1,8 @@
 package com.coursework.featureSearchBooks.searchFilters.mapper
 
+import com.coursework.domain.model.SearchFilters
 import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
 import com.coursework.featureSearchBooks.searchFilters.viewState.SearchFiltersViewState
-import com.coursework.featureSearchBooks.shared.SearchFilters
 import com.coursework.utils.Mapper
 
 class SearchFiltersResultMapper : Mapper<SearchFiltersViewState, SearchFilters> {

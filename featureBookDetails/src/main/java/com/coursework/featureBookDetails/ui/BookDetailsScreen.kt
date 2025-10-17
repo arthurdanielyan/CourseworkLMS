@@ -34,7 +34,9 @@ import com.coursework.corePresentation.commonUi.LoadingStatePresenter
 import com.coursework.corePresentation.commonUi.PrimaryButton
 import com.coursework.corePresentation.commonUi.topBar.ContentWithTopBarHeader
 import com.coursework.corePresentation.commonUi.topBar.TopBarBackButton
+import com.coursework.corePresentation.commonUi.topBar.TopBarWithBackButton
 import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
+import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.featureBookDetails.presentation.BookDetailsUiCallbacks
 import com.coursework.featureBookDetails.presentation.BookDetailsViewModel
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScreenViewState
@@ -77,11 +79,18 @@ private fun BookDetailsScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
+        if (state.dataLoadingState != DataLoadingState.Success) {
+            TopBarWithBackButton(
+                modifier = Modifier.fillMaxWidth(),
+                title = stringResource(Strings.book_details),
+                onBackClick = callbacks::onBackClick,
+            )
+        }
         LoadingStatePresenter(
             modifier = Modifier
                 .fillMaxSize(),
             dataLoadingState = state.dataLoadingState,
-            onRefresh = {}
+            onRefresh = callbacks::onRefresh
         ) {
             state.bookDetails?.let {
                 BookDetailsContent(

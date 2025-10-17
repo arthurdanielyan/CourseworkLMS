@@ -1,7 +1,8 @@
 package com.coursework.data
 
-import com.coursework.domain.model.Book
-import com.coursework.domain.model.BookDetails
+import com.coursework.domain.model.books.Book
+import com.coursework.domain.model.books.BookDetails
+import kotlin.random.Random
 
 object MockData {
 
@@ -86,7 +87,16 @@ object MockData {
             publisher = "Packt Publishing",
             hasPdfVersion = true
         )
-    )
+    ) + (1..200).map {
+        Book(
+            id = it.toLong(),
+            title = "Book $it",
+            subtitle = "Subtitle $it".takeIf { Random.nextBoolean() },
+            authors = listOf("Author $it"),
+            publisher = "Publisher $it",
+            hasPdfVersion = Random.nextBoolean(),
+        )
+    }
 
     val bookDetails = listOf(
         BookDetails(

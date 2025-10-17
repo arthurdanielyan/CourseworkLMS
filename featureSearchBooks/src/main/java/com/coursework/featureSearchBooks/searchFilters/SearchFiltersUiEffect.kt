@@ -1,6 +1,6 @@
 package com.coursework.featureSearchBooks.searchFilters
 
-import com.coursework.featureSearchBooks.shared.SearchFilters
+import com.coursework.domain.model.SearchFilters
 
 sealed interface SearchFiltersUiEffect {
 

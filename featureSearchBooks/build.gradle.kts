@@ -14,6 +14,8 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.paging.runtime.ktx)
+    implementation(libs.paging.compose)
 
     implementation(projects.corePresentation)
     implementation(projects.utils)

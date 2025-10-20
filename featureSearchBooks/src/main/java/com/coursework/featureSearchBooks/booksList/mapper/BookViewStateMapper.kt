@@ -1,7 +1,7 @@
 package com.coursework.featureSearchBooks.booksList.mapper
 
 import com.coursework.corePresentation.viewState.toComposeList
-import com.coursework.domain.model.books.Book
+import com.coursework.domain.books.model.books.Book
 import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 import com.coursework.utils.Mapper
 

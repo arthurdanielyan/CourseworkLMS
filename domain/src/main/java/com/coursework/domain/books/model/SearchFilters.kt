@@ -1,4 +1,4 @@
-package com.coursework.domain.model
+package com.coursework.domain.books.model
 
 data class SearchFilters(
     val author: String? = null,

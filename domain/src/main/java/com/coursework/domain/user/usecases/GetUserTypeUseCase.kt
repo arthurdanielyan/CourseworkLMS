@@ -1,6 +1,6 @@
-package com.coursework.domain.usecases
+package com.coursework.domain.user.usecases
 
-import com.coursework.domain.model.UserType
+import com.coursework.domain.user.model.UserType
 
 class GetUserTypeUseCase {
 

@@ -14,5 +14,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.paging.runtime.ktx)
 
+    implementation(projects.utils)
     implementation(projects.domain)
 }

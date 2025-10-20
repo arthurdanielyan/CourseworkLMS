@@ -1,7 +1,9 @@
 package com.coursework.featureSearchBooks.searchFilters.viewState
 
 import androidx.compose.runtime.Immutable
+import com.coursework.corePresentation.commonUi.filters.FilterViewState
 import com.coursework.corePresentation.viewState.ComposeList
+import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.emptyComposeList
 
 @Immutable
@@ -12,9 +14,11 @@ data class SearchFiltersViewState(
     val topLanguages: ComposeList<FilterViewState> = emptyComposeList(),
     val availabilities: ComposeList<FilterViewState> = emptyComposeList(),
     val topTeachers: ComposeList<FilterViewState> = emptyComposeList(),
+    val dataLoadingState: DataLoadingState = DataLoadingState.Loading,
 ) {
 
     companion object {
+
         val MockCategories = listOf(
             FilterViewState(
                 id = 1,
@@ -98,10 +102,3 @@ data class SearchFiltersViewState(
         )
     }
 }
-
-@Immutable
-data class FilterViewState(
-    val id: Int,
-    val displayName: String,
-    val isSelected: Boolean,
-)

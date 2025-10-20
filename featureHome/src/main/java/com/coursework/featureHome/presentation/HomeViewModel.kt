@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.coursework.corePresentation.Destination
 import com.coursework.corePresentation.navigation.AppRouter
-import com.coursework.domain.model.UserType
-import com.coursework.domain.usecases.GetUserTypeUseCase
+import com.coursework.domain.user.model.UserType
+import com.coursework.domain.user.usecases.GetUserTypeUseCase
 import com.coursework.featureHome.BottomBarItemViewState
 import com.coursework.featureHome.BottomBarType
 import com.coursework.featureHome.ui.DummyScreenDestination

@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.coursework.corePresentation.commonUi.SpacerHeight
 import com.coursework.corePresentation.commonUi.TextField
+import com.coursework.corePresentation.commonUi.filters.FilterSection
 import com.coursework.corePresentation.commonUi.topBar.TopBarWithBackButton
 import com.coursework.corePresentation.extensions.ObserveEffects
 import com.coursework.corePresentation.extensions.OnLifecycleEvents

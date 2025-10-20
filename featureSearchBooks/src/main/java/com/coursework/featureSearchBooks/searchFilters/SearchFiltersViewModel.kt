@@ -2,11 +2,15 @@ package com.coursework.featureSearchBooks.searchFilters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.coursework.corePresentation.commonUi.filters.FilterViewState
 import com.coursework.corePresentation.navigation.AppRouter
+import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.toComposeList
-import com.coursework.domain.model.SearchFilters
+import com.coursework.domain.bookDetails.usecases.GetCategories
+import com.coursework.domain.bookDetails.usecases.GetLanguages
+import com.coursework.domain.bookDetails.usecases.GetTeachers
+import com.coursework.domain.books.model.SearchFilters
 import com.coursework.featureSearchBooks.searchFilters.mapper.SearchFiltersResultMapper
-import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
 import com.coursework.featureSearchBooks.searchFilters.viewState.SearchFiltersViewState
 import com.coursework.utils.combine
 import com.coursework.utils.stateInWhileSubscribed
@@ -15,10 +19,14 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
+import com.coursework.corePresentation.R.string as CoreStrings
 import com.coursework.featureSearchBooks.R.string as Strings
 
 class SearchFiltersViewModel(
     private val stringProvider: StringProvider,
+    private val getCategories: GetCategories,
+    private val getLanguages: GetLanguages,
+    private val getTeachers: GetTeachers,
     private val searchFiltersResultMapper: SearchFiltersResultMapper,
     private val appRouter: AppRouter,
 ) : ViewModel(), SearchFiltersUiCallbacks {
@@ -38,6 +46,7 @@ class SearchFiltersViewModel(
     private val topLanguages = MutableStateFlow(SearchFiltersViewState.MockLanguages)
     private val availabilities = MutableStateFlow(getAvailabilityFilters())
     private val topTeachers = MutableStateFlow(SearchFiltersViewState.MockTeachers)
+    private val dataLoadingState = MutableStateFlow(DataLoadingState.Loading)
 
     val uiState = combine(
         authorInput,
@@ -46,12 +55,14 @@ class SearchFiltersViewModel(
         topLanguages,
         availabilities,
         topTeachers,
+        dataLoadingState,
     ) { authorInput,
         publicationYearInput,
         topCategories,
         topLanguages,
         availabilities,
-        topTeachers ->
+        topTeachers,
+        dataLoadingState ->
 
         SearchFiltersViewState(
             authorInput = authorInput,
@@ -60,6 +71,7 @@ class SearchFiltersViewModel(
             topLanguages = topLanguages.toComposeList(),
             availabilities = availabilities.toComposeList(),
             topTeachers = topTeachers.toComposeList(),
+            dataLoadingState = dataLoadingState,
         )
     }.stateInWhileSubscribed(viewModelScope, SearchFiltersViewState())
 
@@ -77,7 +89,7 @@ class SearchFiltersViewModel(
             ),
             FilterViewState(
                 id = REFERENCE_ONLY_FILTER_ID,
-                displayName = stringProvider.string(Strings.reference_only),
+                displayName = stringProvider.string(CoreStrings.reference_only),
                 isSelected = false,
             )
         )

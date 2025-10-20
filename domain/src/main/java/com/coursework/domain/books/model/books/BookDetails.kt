@@ -1,4 +1,6 @@
-package com.coursework.domain.model.books
+package com.coursework.domain.books.model.books
+
+import com.coursework.domain.bookDetails.model.NamedItem
 
 data class BookDetails(
     val id: Long,
@@ -8,7 +10,7 @@ data class BookDetails(
     val publisher: String?,
     val publicationYear: Int?,
     val edition: String?,
-    val categories: List<String>,
+    val categories: List<NamedItem>,
     val hasPdfVersion: Boolean,
     val pdfUrl: String?,
     val pdfTitle: String?,

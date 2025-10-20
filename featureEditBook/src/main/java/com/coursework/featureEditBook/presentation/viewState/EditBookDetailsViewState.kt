@@ -1,7 +1,10 @@
-package com.coursework.featureEditBook.presentation
+package com.coursework.featureEditBook.presentation.viewState
 
 import androidx.compose.runtime.Immutable
+import com.coursework.corePresentation.commonUi.filters.FilterViewState
+import com.coursework.corePresentation.viewState.ComposeList
 import com.coursework.corePresentation.viewState.DataLoadingState
+import com.coursework.corePresentation.viewState.emptyComposeList
 
 @Immutable
 internal data class EditBookViewState(
@@ -18,20 +21,16 @@ internal data class EditBookDetailsViewState(
     val publisherInput: String = "", // optional
     val publicationYearInput: String = "", // optional
     val editionInput: String = "", // optional
-    val categoriesInput: String = "", // optional
+    val categories: ComposeList<FilterViewState> = emptyComposeList(), // optional
+    val languages: ComposeList<FilterViewState> = emptyComposeList(), // optional
     val bookPdf: BookPdfViewState = BookPdfViewState(), // optional
     val coverImage: CoverImageViewState = CoverImageViewState(), // optional
     val totalCopiesInput: String = "",
-    val copiesAvailableInput: String = "",
-    val languageInput: String = "",
     val isReferenceOnlyChecked: Boolean = false,
 ) {
 
     val isTotalCopiesInputValid = totalCopiesInput.isNotBlank() &&
             totalCopiesInput.all { it.isDigit() }
-
-    val isCopiesAvailableInputValid = copiesAvailableInput.isNotBlank() &&
-            copiesAvailableInput.all { it.isDigit() }
 
     val isPublicationYearInputValid = publicationYearInput.all { it.isDigit() }
 

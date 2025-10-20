@@ -3,10 +3,10 @@ package com.coursework.featureSearchBooks.booksList
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.coursework.domain.model.PagingLimit
-import com.coursework.domain.model.SearchFilters
-import com.coursework.domain.model.books.Book
-import com.coursework.domain.usecases.GetBooksUseCase
+import com.coursework.domain.books.model.PagingLimit
+import com.coursework.domain.books.model.SearchFilters
+import com.coursework.domain.books.model.books.Book
+import com.coursework.domain.books.usecases.GetBooksUseCase
 
 class BooksPagingSource(
     private val query: String,

@@ -1,9 +1,9 @@
-package com.coursework.domain.usecases
+package com.coursework.domain.books.usecases
 
-import com.coursework.domain.model.PagingLimit
-import com.coursework.domain.model.SearchFilters
-import com.coursework.domain.model.books.BookPaginationResult
-import com.coursework.domain.repository.BooksRepository
+import com.coursework.domain.books.BooksRepository
+import com.coursework.domain.books.model.PagingLimit
+import com.coursework.domain.books.model.SearchFilters
+import com.coursework.domain.books.model.books.BookPaginationResult
 
 class GetBooksUseCase(
     private val repository: BooksRepository

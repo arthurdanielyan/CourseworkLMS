@@ -1,4 +1,4 @@
-package com.coursework.domain.model.books
+package com.coursework.domain.books.model.books
 
 data class Book(
     val id: Long,

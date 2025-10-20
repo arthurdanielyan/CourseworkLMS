@@ -35,7 +35,7 @@ import com.coursework.corePresentation.commonUi.IconButton
 import com.coursework.corePresentation.commonUi.MaximizableContent
 import com.coursework.corePresentation.commonUi.SpacerWidth
 import com.coursework.corePresentation.commonUi.modifyIf
-import com.coursework.featureEditBook.presentation.CoverImageViewState
+import com.coursework.featureEditBook.presentation.viewState.CoverImageViewState
 import com.coursework.corePresentation.R.drawable as CoreDrawables
 import com.coursework.featureEditBook.R.drawable as Drawables
 import com.coursework.featureEditBook.R.string as Strings

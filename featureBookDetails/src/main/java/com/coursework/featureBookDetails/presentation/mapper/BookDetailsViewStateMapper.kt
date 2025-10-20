@@ -1,6 +1,6 @@
 package com.coursework.featureBookDetails.presentation.mapper
 
-import com.coursework.domain.model.books.BookDetails
+import com.coursework.domain.books.model.books.BookDetails
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsViewState
 import com.coursework.utils.Mapper
 
@@ -15,7 +15,7 @@ internal class BookDetailsViewStateMapper : Mapper<BookDetails, BookDetailsViewS
             publisher = from.publisher,
             publicationYear = from.publicationYear,
             edition = from.edition,
-            categories = from.categories,
+            categories = from.categories.map { it.displayName },
             hasPdfVersion = from.hasPdfVersion,
             pdfUrl = from.pdfUrl,
             coverImageUrl = from.coverImageUrl,

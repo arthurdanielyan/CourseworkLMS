@@ -13,9 +13,9 @@ import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.navigation.destinations.LoginDestination
-import com.coursework.domain.model.SearchFilters
-import com.coursework.domain.model.UserType
-import com.coursework.domain.usecases.GetUserTypeUseCase
+import com.coursework.domain.books.model.SearchFilters
+import com.coursework.domain.user.model.UserType
+import com.coursework.domain.user.usecases.GetUserTypeUseCase
 import com.coursework.featureSearchBooks.booksList.mapper.BookViewStateMapper
 import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 import com.coursework.featureSearchBooks.booksList.viewState.BooksListViewState

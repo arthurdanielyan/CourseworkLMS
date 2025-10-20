@@ -1,8 +1,8 @@
 package com.coursework.featureSearchBooks.searchFilters
 
 import androidx.compose.runtime.Immutable
-import com.coursework.domain.model.SearchFilters
-import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
+import com.coursework.corePresentation.commonUi.filters.FilterViewState
+import com.coursework.domain.books.model.SearchFilters
 
 @Immutable
 interface SearchFiltersUiCallbacks {

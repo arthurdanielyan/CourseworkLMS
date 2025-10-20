@@ -27,7 +27,7 @@ class IMSApplication : Application() {
             modules(
                 stringProviderModule,
                 module {
-                    val appRouter = AppRouterImplV2()
+                    val appRouter = AppRouterImpl()
                     single<AppRouter> {
                         appRouter
                     }

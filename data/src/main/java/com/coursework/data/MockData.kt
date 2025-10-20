@@ -1,7 +1,9 @@
 package com.coursework.data
 
-import com.coursework.domain.model.books.Book
-import com.coursework.domain.model.books.BookDetails
+import com.coursework.data.bookDetails.model.NamedItemResponse
+import com.coursework.domain.bookDetails.model.NamedItem
+import com.coursework.domain.books.model.books.Book
+import com.coursework.domain.books.model.books.BookDetails
 import kotlin.random.Random
 
 object MockData {
@@ -107,7 +109,12 @@ object MockData {
             publisher = "Big Nerd Ranch",
             publicationYear = 2018,
             edition = "2nd",
-            categories = listOf("Programming", "Kotlin", "Mobile Development"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                )
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Kotlin Programming Guide (PDF)",
@@ -125,7 +132,16 @@ object MockData {
             publisher = "Big Nerd Ranch",
             publicationYear = 2021,
             edition = "4th",
-            categories = listOf("Programming", "Android"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Android Programming Guide (PDF)",
@@ -143,7 +159,16 @@ object MockData {
             publisher = "Apress",
             publicationYear = 2021,
             edition = "1st",
-            categories = listOf("Programming", "Android"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = false,
             pdfUrl = null,
             pdfTitle = null,
@@ -161,7 +186,16 @@ object MockData {
             publisher = "TechPress",
             publicationYear = 2022,
             edition = "1st",
-            categories = listOf("Programming", "Android", "Jetpack Compose"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Jetpack Compose Essentials (PDF)",
@@ -179,7 +213,16 @@ object MockData {
             publisher = "O'Reilly Media",
             publicationYear = 2020,
             edition = "5th",
-            categories = listOf("Programming", "Android", "Kotlin"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = false,
             pdfUrl = null,
             pdfTitle = null,
@@ -197,7 +240,16 @@ object MockData {
             publisher = "O'Reilly Media",
             publicationYear = 2021,
             edition = "3rd",
-            categories = listOf("Programming", "Android"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Head First Android Dev (PDF)",
@@ -215,7 +267,16 @@ object MockData {
             publisher = "Leanpub",
             publicationYear = 2019,
             edition = "1st",
-            categories = listOf("Programming", "Kotlin"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Effective Kotlin (PDF)",
@@ -233,7 +294,16 @@ object MockData {
             publisher = "Raywenderlich",
             publicationYear = 2020,
             edition = "1st",
-            categories = listOf("Programming", "Kotlin", "Concurrency"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Kotlin Coroutines (PDF)",
@@ -251,7 +321,16 @@ object MockData {
             publisher = "Prentice Hall",
             publicationYear = 2019,
             edition = "1st",
-            categories = listOf("Programming", "Android", "Software Engineering"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = false,
             pdfUrl = null,
             pdfTitle = null,
@@ -269,7 +348,16 @@ object MockData {
             publisher = "Packt Publishing",
             publicationYear = 2022,
             edition = "2nd",
-            categories = listOf("Programming", "Android"),
+            categories = listOf(
+                NamedItem(
+                    id = 3,
+                    displayName = "Programming",
+                ),
+                NamedItem(
+                    id = 1,
+                    displayName = "Physics",
+                ),
+            ),
             hasPdfVersion = true,
             pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
             pdfTitle = "Mastering Android Dev (PDF)",
@@ -279,6 +367,73 @@ object MockData {
             language = "English",
             isReferenceOnly = false
         )
+    )
+
+    val Categories = listOf(
+        NamedItemResponse(
+            id = 1,
+            displayName = "Physics",
+        ),
+        NamedItemResponse(
+            id = 2,
+            displayName = "Analytic Geometry and Linear Algebra",
+        ),
+        NamedItemResponse(
+            id = 3,
+            displayName = "Programming",
+        ),
+        NamedItemResponse(
+            id = 4,
+            displayName = "Philosophy",
+        ),
+        NamedItemResponse(
+            id = 5,
+            displayName = "History",
+        ),
+        NamedItemResponse(
+            id = 6,
+            displayName = "Network",
+        ),
+    )
+    val Languages = listOf(
+        NamedItemResponse(
+            id = 1,
+            displayName = "Armenian",
+        ),
+        NamedItemResponse(
+            id = 2,
+            displayName = "Russian",
+        ),
+        NamedItemResponse(
+            id = 3,
+            displayName = "English",
+        ),
+    )
+    val Teachers = listOf(
+        NamedItemResponse(
+            id = 1,
+            displayName = "E. Hovhannisyan",
+        ),
+        NamedItemResponse(
+            id = 2,
+            displayName = "T. Ganovich",
+        ),
+        NamedItemResponse(
+            id = 3,
+            displayName = "Tomeyan",
+        ),
+        NamedItemResponse(
+            id = 4,
+            displayName = "A. Baghdasaryan",
+        ),
+        NamedItemResponse(
+            id = 5,
+            displayName = "L. Andreasyan",
+        ),
+        NamedItemResponse(
+            id = 6,
+            displayName = "E. Virabyan",
+        ),
     )
 
 }

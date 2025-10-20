@@ -1,11 +1,12 @@
-package com.coursework.data
+package com.coursework.data.books
 
+import com.coursework.data.MockData
 import com.coursework.data.downloader.Downloader
-import com.coursework.domain.model.PagingLimit
-import com.coursework.domain.model.SearchFilters
-import com.coursework.domain.model.books.BookDetails
-import com.coursework.domain.model.books.BookPaginationResult
-import com.coursework.domain.repository.BooksRepository
+import com.coursework.domain.books.BooksRepository
+import com.coursework.domain.books.model.PagingLimit
+import com.coursework.domain.books.model.SearchFilters
+import com.coursework.domain.books.model.books.BookDetails
+import com.coursework.domain.books.model.books.BookPaginationResult
 import kotlinx.coroutines.delay
 
 class DummyBooksRepository(
@@ -32,12 +33,6 @@ class DummyBooksRepository(
         }
     }
 
-    override suspend fun getBookDetails(bookId: Long): Result<BookDetails> {
-        return runCatching {
-            MockData.bookDetails.first { it.id == bookId }
-        }
-    }
-
     override fun downloadPdf(book: BookDetails): Result<Unit> {
         return runCatching {
             val pdfUrl = book.pdfUrl ?: throw IllegalArgumentException("Book has no pdf url")
@@ -46,6 +41,12 @@ class DummyBooksRepository(
                 mimeType = "application/pdf",
                 title = book.title,
             )
+        }
+    }
+
+    override suspend fun getBookDetails(bookId: Long): Result<BookDetails> {
+        return runCatching {
+            MockData.bookDetails.first { it.id == bookId }
         }
     }
 }

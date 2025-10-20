@@ -1,4 +1,4 @@
-package com.coursework.domain.model.books
+package com.coursework.domain.books.model.books
 
 data class BookPaginationResult(
     val books: List<Book>,

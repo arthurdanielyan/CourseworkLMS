@@ -3,13 +3,24 @@ package com.coursework.featureEditBook.presentation
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.coursework.corePresentation.commonUi.filters.FilterViewState
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.systemUtils.externalActivityLauncher.ExternalActivityLauncher
 import com.coursework.corePresentation.systemUtils.uriResolver.UriResolver
 import com.coursework.corePresentation.viewState.DataLoadingState
-import com.coursework.domain.usecases.GetBookDetailsUseCase
+import com.coursework.corePresentation.viewState.toComposeList
+import com.coursework.corePresentation.viewState.toDataLoadingState
+import com.coursework.domain.bookDetails.usecases.GetBookDetailsUseCase
+import com.coursework.domain.bookDetails.usecases.GetCategories
+import com.coursework.domain.bookDetails.usecases.GetLanguages
 import com.coursework.featureEditBook.presentation.mapper.EditBookViewStateMapper
+import com.coursework.featureEditBook.presentation.mapper.FilterViewStateMapper
+import com.coursework.featureEditBook.presentation.viewState.BookPdfViewState
+import com.coursework.featureEditBook.presentation.viewState.CoverImageViewState
+import com.coursework.featureEditBook.presentation.viewState.EditBookDetailsViewState
+import com.coursework.featureEditBook.presentation.viewState.EditBookViewState
+import com.coursework.utils.mapList
 import com.coursework.utils.stateInWhileSubscribed
 import com.coursework.utils.stringProvider.StringProvider
 import kotlinx.coroutines.channels.BufferOverflow
@@ -27,6 +38,9 @@ internal class EditBookViewModel(
     destination: EditBookDestination,
     private val appRouter: AppRouter,
     private val getBookDetailsUseCase: GetBookDetailsUseCase,
+    private val getCategories: GetCategories,
+    private val getLanguages: GetLanguages,
+    private val filterViewStateMapper: FilterViewStateMapper,
     private val editBookViewStateMapper: EditBookViewStateMapper,
     private val uriResolver: UriResolver,
     private val externalActivityLauncher: ExternalActivityLauncher,
@@ -66,6 +80,7 @@ internal class EditBookViewModel(
         } else {
             destination.bookId?.let(::getBookDetails)
         }
+        setupFilters()
     }
 
     private fun getBookDetails(bookId: Long) {
@@ -78,11 +93,54 @@ internal class EditBookViewModel(
                         editBookViewStateMapper.map(result)
                     }
                     topBarTitle.update { result.title }
-                    dataLoadingState.update { DataLoadingState.Success }
+//                    dataLoadingState.update { DataLoadingState.Success }
                 }
                 .onFailure {
-                    dataLoadingState.update { DataLoadingState.Error }
+//                    dataLoadingState.update { DataLoadingState.Error }
                 }
+        }
+    }
+
+    private fun setupFilters() {
+        viewModelScope.launch {
+            runCatching {
+                getCategories()
+                    .onSuccess { categories ->
+                        details.update { oldState ->
+                            oldState.copy(
+                                categories = filterViewStateMapper.mapList(
+                                    list = categories,
+                                    params = { category ->
+                                        FilterViewStateMapper.Params(
+                                            isSelected = details.value.categories
+                                                .firstOrNull { it.id == category.id } != null
+                                        )
+                                    }
+                                ).toComposeList()
+                            )
+                        }
+                    }.getOrThrow()
+                getLanguages()
+                    .onSuccess { languages ->
+                        details.update { oldState ->
+                            oldState.copy(
+                                languages = filterViewStateMapper.mapList(
+                                    list = languages,
+                                    params = { language ->
+                                        FilterViewStateMapper.Params(
+                                            isSelected = details.value.languages
+                                                .firstOrNull { it.id == language.id } != null
+                                        )
+                                    }
+                                ).toComposeList()
+                            )
+                        }
+                    }.getOrThrow()
+            }.onSuccess {
+                dataLoadingState.update { DataLoadingState.Success }
+            }.onFailure { throwable ->
+                dataLoadingState.update { throwable.toDataLoadingState() }
+            }
         }
     }
 
@@ -158,27 +216,33 @@ internal class EditBookViewModel(
         }
     }
 
-    override fun onCategoriesType(newValue: String) {
+    override fun onCategorySelected(categoryFilter: FilterViewState) {
         details.update {
-            it.copy(categoriesInput = newValue)
+            it.copy(
+                categories = it.categories.map { filter ->
+                    if (filter.id == categoryFilter.id) {
+                        filter.copy(isSelected = filter.isSelected.not())
+                    } else {
+                        filter
+                    }
+                }.toComposeList()
+            )
+        }
+    }
+
+    override fun onLanguageSelected(languageFilter: FilterViewState) {
+        details.update {
+            it.copy(
+                languages = it.languages.map { filter ->
+                    filter.copy(isSelected = filter.id == languageFilter.id)
+                }.toComposeList()
+            )
         }
     }
 
     override fun onTotalCopiesType(newValue: String) {
         details.update {
             it.copy(totalCopiesInput = newValue)
-        }
-    }
-
-    override fun onCopiesAvailableType(newValue: String) {
-        details.update {
-            it.copy(copiesAvailableInput = newValue)
-        }
-    }
-
-    override fun onLanguageType(newValue: String) {
-        details.update {
-            it.copy(languageInput = newValue)
         }
     }
 
@@ -228,6 +292,14 @@ internal class EditBookViewModel(
         details.update {
             it.copy(
                 coverImage = CoverImageViewState()
+            )
+        }
+    }
+
+    override fun onReferenceCheckedStateChanged(checked: Boolean) {
+        details.update {
+            it.copy(
+                isReferenceOnlyChecked = checked
             )
         }
     }

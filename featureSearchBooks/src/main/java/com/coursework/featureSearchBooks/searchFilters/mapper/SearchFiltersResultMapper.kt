@@ -1,7 +1,7 @@
 package com.coursework.featureSearchBooks.searchFilters.mapper
 
-import com.coursework.domain.model.SearchFilters
-import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
+import com.coursework.corePresentation.commonUi.filters.FilterViewState
+import com.coursework.domain.books.model.SearchFilters
 import com.coursework.featureSearchBooks.searchFilters.viewState.SearchFiltersViewState
 import com.coursework.utils.Mapper
 

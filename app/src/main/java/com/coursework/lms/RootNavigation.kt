@@ -1,16 +1,16 @@
 package com.coursework.lms
 
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.coursework.corePresentation.navigation.EnterTransition
-import com.coursework.corePresentation.navigation.ExitTransition
-import com.coursework.corePresentation.navigation.PopEnterTransition
-import com.coursework.corePresentation.navigation.PopExitTransition
+import com.coursework.corePresentation.navigation.SlideInFromLeft
+import com.coursework.corePresentation.navigation.SlideInFromRight
+import com.coursework.corePresentation.navigation.SlideOutToLeft
+import com.coursework.corePresentation.navigation.SlideOutToRight
 import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.navigation.destinations.HomeScreenDestination
@@ -33,10 +33,10 @@ internal fun RootNavigation() {
     NavHost(
         navController = navController,
         startDestination = LoginDestination,
-        enterTransition = { EnterTransition },
-        exitTransition = { ExitTransition },
-        popEnterTransition = { PopEnterTransition },
-        popExitTransition = { PopExitTransition }
+        enterTransition = { SlideInFromRight },
+        exitTransition = { SlideOutToLeft },
+        popEnterTransition = { SlideInFromLeft },
+        popExitTransition = { SlideOutToRight }
     ) {
         appScreens.forEach { destinationClass, screenContent ->
             composable(destinationClass) {
@@ -51,10 +51,26 @@ internal fun RootNavigation() {
         }
 
         composable<HomeScreenDestination>(
-            exitTransition = { slideOutHorizontally { it } }
+            exitTransition = {
+                getHomeScreenExitTransition(targetState)
+            }
         ) {
             HomeScreen()
         }
+    }
+}
+
+fun getHomeScreenExitTransition(
+    target: NavBackStackEntry
+): ExitTransition {
+
+    return when {
+        target.destination.route.orEmpty()
+            .startsWith(LoginDestination::class.qualifiedName.orEmpty()) -> {
+            SlideOutToRight
+        }
+
+        else -> SlideOutToLeft
     }
 }
 

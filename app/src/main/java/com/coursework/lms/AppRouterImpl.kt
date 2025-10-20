@@ -17,7 +17,7 @@ import com.coursework.featureSearchBooks.searchFilters.SearchFiltersDestination
 import com.coursework.featureSearchBooks.shared.SearchBooksDestination
 import kotlin.reflect.KClass
 
-class AppRouterImplV2 : AppRouter, NavControllersHolder {
+class AppRouterImpl : AppRouter, NavControllersHolder {
 
     private val controllers = linkedMapOf<String, NavHostController>()
 

@@ -6,9 +6,9 @@ import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.viewState.DataLoadingState
 import com.coursework.corePresentation.viewState.toDataLoadingState
-import com.coursework.domain.model.books.BookDetails
-import com.coursework.domain.usecases.DownloadPdfUseCase
-import com.coursework.domain.usecases.GetBookDetailsUseCase
+import com.coursework.domain.bookDetails.usecases.GetBookDetailsUseCase
+import com.coursework.domain.books.model.books.BookDetails
+import com.coursework.domain.books.usecases.DownloadPdfUseCase
 import com.coursework.featureBookDetails.presentation.mapper.BookDetailsViewStateMapper
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsScreenViewState
 import com.coursework.featureBookDetails.presentation.viewState.BookDetailsViewState

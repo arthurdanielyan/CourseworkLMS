@@ -15,10 +15,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.coursework.corePresentation.Destination
 import com.coursework.corePresentation.extensions.sharedViewModel
-import com.coursework.corePresentation.navigation.EnterTransition
-import com.coursework.corePresentation.navigation.ExitTransition
-import com.coursework.corePresentation.navigation.PopEnterTransition
-import com.coursework.corePresentation.navigation.PopExitTransition
+import com.coursework.corePresentation.navigation.SlideInFromLeft
+import com.coursework.corePresentation.navigation.SlideInFromRight
+import com.coursework.corePresentation.navigation.SlideOutToLeft
+import com.coursework.corePresentation.navigation.SlideOutToRight
 import com.coursework.corePresentation.navigation.registerNavController
 import com.coursework.featureHome.presentation.HomeUiCallbacks
 import com.coursework.featureHome.presentation.HomeViewModel
@@ -52,10 +52,10 @@ fun HomeScreen() {
             modifier = Modifier.weight(1f),
             navController = navController,
             startDestination = SearchBooksDestination,
-            enterTransition = { EnterTransition },
-            popEnterTransition = { PopEnterTransition },
-            exitTransition = { ExitTransition },
-            popExitTransition = { PopExitTransition },
+            enterTransition = { SlideInFromRight },
+            popEnterTransition = { SlideInFromLeft },
+            exitTransition = { SlideOutToLeft },
+            popExitTransition = { SlideOutToRight },
         ) {
             navigation<SearchBooksDestination>(
                 startDestination = BooksListDestination,

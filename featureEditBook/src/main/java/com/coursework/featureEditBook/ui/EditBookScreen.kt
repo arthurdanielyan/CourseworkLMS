@@ -15,10 +15,12 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -32,6 +34,8 @@ import com.coursework.corePresentation.commonUi.PrimaryButton
 import com.coursework.corePresentation.commonUi.SecondaryButton
 import com.coursework.corePresentation.commonUi.SpacerWidth
 import com.coursework.corePresentation.commonUi.TextField
+import com.coursework.corePresentation.commonUi.clickableWithoutIndication
+import com.coursework.corePresentation.commonUi.filters.FilterSection
 import com.coursework.corePresentation.commonUi.topBar.TopBarWithBackButton
 import com.coursework.corePresentation.extensions.ObserveEffects
 import com.coursework.corePresentation.extensions.isKeyboardVisible
@@ -39,7 +43,7 @@ import com.coursework.corePresentation.navigation.destinations.EditBookDestinati
 import com.coursework.featureEditBook.presentation.EditBookUiCallbacks
 import com.coursework.featureEditBook.presentation.EditBookUiEffect
 import com.coursework.featureEditBook.presentation.EditBookViewModel
-import com.coursework.featureEditBook.presentation.EditBookViewState
+import com.coursework.featureEditBook.presentation.viewState.EditBookViewState
 import com.coursework.featureEditBook.ui.components.CoverImagePicker
 import com.coursework.featureEditBook.ui.components.PdfPicker
 import org.koin.androidx.compose.koinViewModel
@@ -194,11 +198,28 @@ private fun EditBookScreenContent(
             label = stringResource(Strings.edition_label),
         )
         TextField(
-            value = state.details.categoriesInput,
-            onValueChange = callbacks::onCategoriesType,
+            value = state.details.totalCopiesInput,
+            onValueChange = callbacks::onTotalCopiesType,
+            keyboardType = KeyboardType.Number,
             modifier = Modifier.fillMaxWidth(),
-            label = stringResource(Strings.categories_label),
-            placeholder = stringResource(Strings.categories_placeholder),
+            label = stringResource(Strings.total_copies_label),
+            placeholder = stringResource(Strings.total_copies_placeholder),
+            isError = state.details.isTotalCopiesInputValid.not(),
+            errorMessageEnabled = true,
+        )
+        FilterSection(
+            modifier = Modifier
+                .padding(vertical = 8.dp),
+            title = stringResource(CoreStrings.categories),
+            filters = state.details.categories,
+            onFilterSelect = callbacks::onCategorySelected,
+        )
+        FilterSection(
+            modifier = Modifier
+                .padding(vertical = 8.dp),
+            title = stringResource(CoreStrings.language),
+            filters = state.details.languages,
+            onFilterSelect = callbacks::onLanguageSelected,
         )
         PdfPicker(
             bookPdf = state.details.bookPdf,
@@ -211,35 +232,25 @@ private fun EditBookScreenContent(
             onPickImageClick = callbacks::onPickCoverImageClick,
             onRemoveClick = callbacks::onRemoveImageClick,
         )
-        TextField(
-            value = state.details.totalCopiesInput,
-            onValueChange = callbacks::onTotalCopiesType,
-            keyboardType = KeyboardType.Number,
-            modifier = Modifier.fillMaxWidth(),
-            label = stringResource(Strings.total_copies_label),
-            placeholder = stringResource(Strings.total_copies_placeholder),
-            isError = state.details.isTotalCopiesInputValid.not(),
-            errorMessageEnabled = true,
-        )
-        TextField(
-            value = state.details.copiesAvailableInput,
-            onValueChange = callbacks::onCopiesAvailableType,
-            keyboardType = KeyboardType.Number,
-            modifier = Modifier.fillMaxWidth(),
-            label = stringResource(Strings.copies_available_label),
-            placeholder = stringResource(Strings.copies_available_placeholder),
-            isError = state.details.isCopiesAvailableInputValid.not(),
-            errorMessageEnabled = true,
-        )
-        TextField(
-            value = state.details.languageInput,
-            onValueChange = callbacks::onLanguageType,
-            modifier = Modifier.fillMaxWidth(),
-            label = stringResource(Strings.language_label),
-            placeholder = stringResource(Strings.language_placeholder),
-            isError = state.details.languageInput.isBlank(),
-            errorMessageEnabled = true,
-        )
+        Row(
+            modifier = Modifier
+                .clickableWithoutIndication(
+                    onClick = {
+                        callbacks.onReferenceCheckedStateChanged(state.details.isReferenceOnlyChecked.not())
+                    }
+                ),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Checkbox(
+                checked = state.details.isReferenceOnlyChecked,
+                onCheckedChange = callbacks::onReferenceCheckedStateChanged,
+            )
+            Text(
+                text = stringResource(CoreStrings.reference_only),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
         Row(
             modifier = Modifier
                 .fillMaxWidth(),

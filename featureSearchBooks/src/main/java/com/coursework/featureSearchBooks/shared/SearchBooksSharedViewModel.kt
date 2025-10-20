@@ -1,7 +1,7 @@
 package com.coursework.featureSearchBooks.shared
 
 import androidx.lifecycle.ViewModel
-import com.coursework.domain.model.SearchFilters
+import com.coursework.domain.books.model.SearchFilters
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

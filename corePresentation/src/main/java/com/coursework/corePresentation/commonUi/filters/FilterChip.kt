@@ -1,4 +1,4 @@
-package com.coursework.featureSearchBooks.searchFilters.ui
+package com.coursework.corePresentation.commonUi.filters
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
 
 @Composable
 fun FilterChip(

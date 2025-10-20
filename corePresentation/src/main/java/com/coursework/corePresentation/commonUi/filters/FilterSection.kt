@@ -1,4 +1,4 @@
-package com.coursework.featureSearchBooks.searchFilters.ui
+package com.coursework.corePresentation.commonUi.filters
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,9 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import com.coursework.corePresentation.viewState.ComposeList
-import com.coursework.featureSearchBooks.searchFilters.viewState.FilterViewState
 import com.coursework.corePresentation.R.drawable as CoreDrawables
-import com.coursework.featureSearchBooks.R.string as Strings
+import com.coursework.corePresentation.R.string as Strings
 
 @Composable
 fun FilterSection(

@@ -1,7 +1,7 @@
 package com.coursework.featureSearchBooks.booksList
 
 import androidx.compose.runtime.Immutable
-import com.coursework.domain.model.SearchFilters
+import com.coursework.domain.books.model.SearchFilters
 import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 
 @Immutable

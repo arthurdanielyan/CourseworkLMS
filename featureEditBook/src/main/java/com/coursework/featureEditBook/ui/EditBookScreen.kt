@@ -257,7 +257,7 @@ private fun EditBookScreenContent(
         ) {
             SecondaryButton(
                 modifier = Modifier.weight(1f),
-                text = stringResource(Strings.cancel),
+                text = stringResource(CoreStrings.cancel),
                 onClick = callbacks::onCancelClick
             )
             SpacerWidth(16.dp)

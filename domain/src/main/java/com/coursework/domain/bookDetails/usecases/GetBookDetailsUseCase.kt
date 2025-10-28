@@ -1,10 +1,10 @@
 package com.coursework.domain.bookDetails.usecases
 
-import com.coursework.domain.books.BooksRepository
-import com.coursework.domain.books.model.books.BookDetails
+import com.coursework.domain.bookDetails.BookDetailsRepository
+import com.coursework.domain.bookDetails.model.BookDetails
 
 class GetBookDetailsUseCase(
-    private val repository: BooksRepository
+    private val repository: BookDetailsRepository
 ) {
 
     suspend operator fun invoke(bookId: Long): Result<BookDetails> {

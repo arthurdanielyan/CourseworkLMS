@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,6 +49,7 @@ import com.coursework.corePresentation.R.string as CoreStrings
 import com.coursework.featureBookDetails.R.drawable as Drawables
 import com.coursework.featureBookDetails.R.string as Strings
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookDetailsScreen(
     destination: BookDetailsDestination
@@ -64,6 +67,12 @@ fun BookDetailsScreen(
         state = state,
         callbacks = callbacks,
     )
+
+    val dialogState by viewModel.dialogState.collectAsStateWithLifecycle()
+    BookDetailsDialog(
+        dialogState = dialogState,
+        callbacks = callbacks
+    )
 }
 
 @Composable
@@ -71,7 +80,6 @@ private fun BookDetailsScreen(
     state: BookDetailsScreenViewState,
     callbacks: BookDetailsUiCallbacks,
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,23 +135,35 @@ private fun BookDetailsContent(
     ) {
         bookDetailsContent(
             bookDetails = bookDetails,
-            onDownloadPdfClick = callbacks::onDownloadPdfClick
+            onDownloadPdfClick = callbacks::onDownloadPdfClick,
+            onReserveBookClick = callbacks::onReserveClick
         )
     }
 }
 
 private fun LazyListScope.bookDetailsContent(
     bookDetails: BookDetailsViewState,
-    onDownloadPdfClick: () -> Unit
+    onDownloadPdfClick: () -> Unit,
+    onReserveBookClick: () -> Unit,
 ) {
     if (bookDetails.hasPdfVersion) {
         item("download") {
-            PrimaryButton(
+            Row(
                 modifier = Modifier
                     .padding(horizontal = 16.dp),
-                text = stringResource(Strings.download_pdf),
-                onClick = onDownloadPdfClick
-            )
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                PrimaryButton(
+                    text = stringResource(Strings.download_pdf),
+                    onClick = onDownloadPdfClick
+                )
+                if (bookDetails.showBookButton) {
+                    PrimaryButton(
+                        text = stringResource(Strings.reserve),
+                        onClick = onReserveBookClick,
+                    )
+                }
+            }
         }
     }
     if (bookDetails.isReferenceOnly) {

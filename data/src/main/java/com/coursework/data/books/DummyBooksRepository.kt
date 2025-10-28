@@ -2,10 +2,11 @@ package com.coursework.data.books
 
 import com.coursework.data.MockData
 import com.coursework.data.downloader.Downloader
+import com.coursework.domain.bookDetails.model.BookDetails
 import com.coursework.domain.books.BooksRepository
 import com.coursework.domain.books.model.PagingLimit
 import com.coursework.domain.books.model.SearchFilters
-import com.coursework.domain.books.model.books.BookDetails
+import com.coursework.domain.books.model.books.Book
 import com.coursework.domain.books.model.books.BookPaginationResult
 import kotlinx.coroutines.delay
 
@@ -44,9 +45,7 @@ class DummyBooksRepository(
         }
     }
 
-    override suspend fun getBookDetails(bookId: Long): Result<BookDetails> {
-        return runCatching {
-            MockData.bookDetails.first { it.id == bookId }
-        }
+    override suspend fun getMyAddedBooks(): Result<List<Book>> {
+        TODO("Not yet implemented")
     }
 }

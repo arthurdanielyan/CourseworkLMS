@@ -4,6 +4,7 @@ import android.app.Application
 import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.navigation.NavControllersHolder
 import com.coursework.corePresentation.systemUtils.di.systemUtils
+import com.coursework.corePresentation.viewState.books.di.coreBooksModule
 import com.coursework.data.di.dataModule
 import com.coursework.domain.di.domainModule
 import com.coursework.featureBookDetails.di.featureBookDetailsModule
@@ -38,6 +39,7 @@ class IMSApplication : Application() {
                 dataModule,
                 domainModule,
                 systemUtils,
+                coreBooksModule,
                 homeModule,
                 featureLoginModule,
                 booksListModule,

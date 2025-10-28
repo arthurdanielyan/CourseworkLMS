@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.datetime)
 
     implementation(projects.corePresentation)
     implementation(projects.utils)

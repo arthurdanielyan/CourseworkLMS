@@ -12,4 +12,5 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.paging.runtime.ktx)
+    implementation(libs.kotlinx.datetime)
 }

@@ -1,7 +1,10 @@
 package com.coursework.data.bookDetails.model
 
-//@Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class NamedItemResponse(
-    val id: Int,
-    val displayName: String,
+    @SerialName("id") val id: Int,
+    @SerialName("display_name") val displayName: String,
 )

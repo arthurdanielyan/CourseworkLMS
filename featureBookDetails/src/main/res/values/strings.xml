@@ -11,4 +11,8 @@
     <string name="reference_only_message">This book is reference only</string>
     <string name="download_pdf">Download PDF</string>
     <string name="book_details">Book Details</string>
+    <string name="reserve">Reserve</string>
+    <string name="select_return_date">When would you like to return the book</string>
+    <string name="confirm">Confirm</string>
+    <string name="ok">OK</string>
 </resources>

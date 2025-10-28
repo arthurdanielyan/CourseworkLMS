@@ -27,4 +27,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(projects.domain)
+    implementation(projects.utils)
 }

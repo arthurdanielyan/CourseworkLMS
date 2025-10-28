@@ -26,4 +26,20 @@ internal data class BookDetailsViewState(
     val copiesAvailable: Int,
     val language: String,
     val isReferenceOnly: Boolean,
-)
+    val isReserveButtonLoading: Boolean = false,
+) {
+    val showBookButton = copiesAvailable > 0 && isReferenceOnly.not()
+}
+
+@Immutable
+sealed interface BookDetailsDialogState {
+
+    data class ReturnDatePickerDialog(
+        val maxDateMillis: Long = Long.MAX_VALUE,
+        val inConfirmButtonLoading: Boolean = false
+    ) : BookDetailsDialogState
+
+    data class MessageDialog(
+        val message: String
+    ) : BookDetailsDialogState
+}

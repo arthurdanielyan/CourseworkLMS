@@ -7,5 +7,8 @@ internal interface BookDetailsUiCallbacks {
 
     fun onBackClick()
     fun onDownloadPdfClick()
+    fun onReserveClick()
+    fun onDismissDialog()
+    fun onConfirmDate(dateMillis: Long)
     fun onRefresh()
 }

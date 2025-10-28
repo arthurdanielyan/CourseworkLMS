@@ -1,7 +1,7 @@
 package com.coursework.featureEditBook.presentation.mapper
 
 import com.coursework.corePresentation.viewState.toComposeList
-import com.coursework.domain.books.model.books.BookDetails
+import com.coursework.domain.bookDetails.model.BookDetails
 import com.coursework.featureEditBook.presentation.viewState.BookPdfViewState
 import com.coursework.featureEditBook.presentation.viewState.CoverImageViewState
 import com.coursework.featureEditBook.presentation.viewState.EditBookDetailsViewState

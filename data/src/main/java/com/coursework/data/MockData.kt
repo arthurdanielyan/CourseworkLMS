@@ -1,9 +1,9 @@
 package com.coursework.data
 
 import com.coursework.data.bookDetails.model.NamedItemResponse
+import com.coursework.domain.bookDetails.model.BookDetails
 import com.coursework.domain.bookDetails.model.NamedItem
 import com.coursework.domain.books.model.books.Book
-import com.coursework.domain.books.model.books.BookDetails
 import kotlin.random.Random
 
 object MockData {

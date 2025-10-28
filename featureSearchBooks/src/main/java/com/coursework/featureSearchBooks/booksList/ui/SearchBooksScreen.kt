@@ -48,10 +48,10 @@ import com.coursework.corePresentation.commonUi.PrimaryButton
 import com.coursework.corePresentation.commonUi.TextField
 import com.coursework.corePresentation.extensions.ComposeCollect
 import com.coursework.corePresentation.viewState.DataLoadingState
+import com.coursework.corePresentation.viewState.books.BookViewState
 import com.coursework.corePresentation.viewState.toDataLoadingState
 import com.coursework.featureSearchBooks.booksList.BooksListUiCallbacks
 import com.coursework.featureSearchBooks.booksList.BooksListViewModel
-import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 import com.coursework.featureSearchBooks.booksList.viewState.BooksListViewState
 import com.coursework.featureSearchBooks.shared.SearchBooksSharedViewModel
 import org.koin.androidx.compose.koinViewModel

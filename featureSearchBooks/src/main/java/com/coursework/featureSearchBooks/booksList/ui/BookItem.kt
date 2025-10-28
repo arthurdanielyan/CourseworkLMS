@@ -20,7 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
+import com.coursework.corePresentation.viewState.books.BookViewState
 import com.coursework.corePresentation.R.drawable as CoreDrawables
 import com.coursework.featureSearchBooks.R.string as Strings
 

@@ -1,6 +1,4 @@
-package com.coursework.domain.books.model.books
-
-import com.coursework.domain.bookDetails.model.NamedItem
+package com.coursework.domain.bookDetails.model
 
 data class BookDetails(
     val id: Long,

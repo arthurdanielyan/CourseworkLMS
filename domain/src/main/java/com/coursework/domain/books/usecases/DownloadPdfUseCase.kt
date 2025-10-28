@@ -1,7 +1,7 @@
 package com.coursework.domain.books.usecases
 
+import com.coursework.domain.bookDetails.model.BookDetails
 import com.coursework.domain.books.BooksRepository
-import com.coursework.domain.books.model.books.BookDetails
 
 class DownloadPdfUseCase(
     val repository: BooksRepository

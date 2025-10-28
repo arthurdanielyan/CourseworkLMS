@@ -1,11 +1,11 @@
-package com.coursework.featureSearchBooks.booksList.mapper
+package com.coursework.corePresentation.viewState.books.mapper
 
+import com.coursework.corePresentation.viewState.books.BookViewState
 import com.coursework.corePresentation.viewState.toComposeList
 import com.coursework.domain.books.model.books.Book
-import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 import com.coursework.utils.Mapper
 
-internal class BookViewStateMapper : Mapper<Book, BookViewState> {
+class BookViewStateMapper : Mapper<Book, BookViewState> {
 
     override fun map(from: Book): BookViewState {
         return BookViewState(

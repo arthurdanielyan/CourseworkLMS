@@ -13,11 +13,11 @@ import com.coursework.corePresentation.navigation.AppRouter
 import com.coursework.corePresentation.navigation.destinations.BookDetailsDestination
 import com.coursework.corePresentation.navigation.destinations.EditBookDestination
 import com.coursework.corePresentation.navigation.destinations.LoginDestination
+import com.coursework.corePresentation.viewState.books.BookViewState
+import com.coursework.corePresentation.viewState.books.mapper.BookViewStateMapper
 import com.coursework.domain.books.model.SearchFilters
 import com.coursework.domain.user.model.UserType
 import com.coursework.domain.user.usecases.GetUserTypeUseCase
-import com.coursework.featureSearchBooks.booksList.mapper.BookViewStateMapper
-import com.coursework.featureSearchBooks.booksList.viewState.BookViewState
 import com.coursework.featureSearchBooks.booksList.viewState.BooksListViewState
 import com.coursework.featureSearchBooks.searchFilters.SearchFiltersDestination
 import com.coursework.utils.stateInWhileSubscribed

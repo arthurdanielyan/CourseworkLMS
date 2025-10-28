@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.util.lerp
+import kotlin.math.min
 
 fun Modifier.alpha(alpha: () -> Float) =
     this.graphicsLayer {
@@ -91,11 +92,10 @@ fun Modifier.maximizable(
             position = it.positionInWindow()
         }
         .graphicsLayer {
-            val scale = if (contentSize.width >= contentSize.height) {
-                screenWidth / contentSize.width.toFloat()
-            } else {
-                screenHeight / contentSize.height.toFloat()
-            }
+            val scaleXFactor = screenWidth / contentSize.width.toFloat()
+            val scaleYFactor = screenHeight / contentSize.height.toFloat()
+            val scale = min(scaleXFactor, scaleYFactor)
+
             scaleX = lerp(
                 start = 1f,
                 stop = scale,
